@@ -1,0 +1,3538 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINAL BOARDING — Vintage Express Countdown Lock Screen Studio</title>
+
+  <!-- Google Fonts: Playfair Display (Vintage Editorial), Space Grotesk (Precision Sans), JetBrains Mono (Ticket Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Space Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            studio: {
+              950: '#0E0F10',
+              900: '#141619',
+              850: '#1A1D22',
+              800: '#21252C',
+              700: '#2D333D',
+            },
+            ticket: {
+              cream: '#F4EFE3',
+              navy: '#182230',
+              terracotta: '#C84B31',
+              forest: '#236B4E',
+              brass: '#B9975B',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #101112;
+      color: #F3F0E8;
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Architectural Blueprint Grid Backdrop */
+    .blueprint-bg {
+      background-color: #101112;
+      background-image:
+        radial-gradient(circle at 22% 18%, rgba(200, 75, 49, 0.08), transparent 46%),
+        radial-gradient(circle at 80% 82%, rgba(185, 151, 91, 0.07), transparent 48%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    /* Studio Panels & Recessed Controls */
+    .studio-panel {
+      background: linear-gradient(180deg, #171A1F 0%, #121418 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 18px 40px -22px rgba(0, 0, 0, 0.9);
+    }
+
+    .studio-recess {
+      background-color: #0C0E11;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.65);
+    }
+
+    .tactile-btn {
+      transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 140ms ease, border-color 140ms ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    .tactile-btn:hover {
+      transform: translateY(-1px);
+    }
+    .tactile-btn:active {
+      transform: translateY(0px) scale(0.985);
+    }
+
+    /* Photorealistic iPhone 16 Pro Brushed Natural/Dark Titanium Chassis */
+    .iphone16-titanium {
+      background: linear-gradient(
+        135deg,
+        #8A847B 0%,
+        #4F4C47 16%,
+        #A6A096 34%,
+        #393734 56%,
+        #7C766D 78%,
+        #2D2C29 94%,
+        #66615A 100%
+      );
+      box-shadow:
+        0 40px 85px -16px rgba(0, 0, 0, 0.92),
+        0 14px 30px -8px rgba(0, 0, 0, 0.78),
+        0 0 0 1px rgba(255, 250, 240, 0.28),
+        inset 0 0 0 1px rgba(255, 252, 244, 0.24);
+    }
+
+    .iphone16-bezel {
+      background-color: #030304;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.95);
+    }
+
+    .iphone16-side-btn-left {
+      background: linear-gradient(180deg, #A39D93 0%, #52504B 42%, #878178 76%, #31302D 100%);
+      box-shadow: -1px 0 2px rgba(0, 0, 0, 0.7), inset 1px 0 0 rgba(255, 252, 245, 0.45);
+    }
+
+    .iphone16-side-btn-right {
+      background: linear-gradient(180deg, #A39D93 0%, #52504B 42%, #878178 76%, #31302D 100%);
+      box-shadow: 1px 0 2px rgba(0, 0, 0, 0.7), inset -1px 0 0 rgba(255, 252, 245, 0.45);
+    }
+
+    .ios-font {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Space Grotesk", sans-serif;
+    }
+
+    /* Desktop Monitor Frame */
+    .desktop-bezel {
+      background: linear-gradient(180deg, #2A2E36 0%, #14161B 100%);
+      box-shadow:
+        0 34px 76px -18px rgba(0, 0, 0, 0.92),
+        0 0 0 1px rgba(255, 255, 255, 0.14),
+        inset 0 0 0 2px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Engineering Safe-Zone X-Ray Hatches */
+    .xray-cyan {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(56, 189, 248, 0.12),
+        rgba(56, 189, 248, 0.12) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
+
+    .xray-terra {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(200, 75, 49, 0.1),
+        rgba(200, 75, 49, 0.1) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
+
+    .xray-green {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(35, 107, 78, 0.15),
+        rgba(35, 107, 78, 0.15) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
+
+    .xray-gold {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(234, 179, 8, 0.18),
+        rgba(234, 179, 8, 0.18) 5px,
+        transparent 5px,
+        transparent 10px
+      );
+    }
+
+    /* Native date input dark icon fix */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.85);
+      cursor: pointer;
+    }
+
+    /* Subtle custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #101112;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2C313A;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3F4654;
+    }
+
+    /* Toast animation */
+    @keyframes toastSlideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+    }
+    .toast-anim {
+      animation: toastSlideUp 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="blueprint-bg min-h-screen flex flex-col antialiased selection:bg-ticket-terracotta/40 selection:text-white">
+
+  <!-- TOP NAVIGATION & TELEMETRY BAR -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#101112]/90 backdrop-blur-md">
+    <div class="max-w-[1620px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-ticket-navy border border-ticket-brass/50 flex items-center justify-center shrink-0 shadow-inner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+            <path d="M13 5v2" />
+            <path d="M13 17v2" />
+            <path d="M13 11v2" />
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="font-serif text-base sm:text-lg font-extrabold tracking-wide text-[#F4EFE3] truncate">
+              FINAL BOARDING
+            </h1>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-semibold tracking-widest bg-ticket-terracotta/20 border border-ticket-terracotta/40 text-[#F3A694]">
+              EXPRESS STUDIO
+            </span>
+          </div>
+          <p class="text-[11px] font-mono text-zinc-400 truncate">
+            Vintage Countdown Lock Screen &middot; Handshake &times; Google Gemini
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Route Pill & Quick Actions -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#16181D] border border-white/10 font-mono text-xs">
+          <span id="headerRouteText" class="text-ticket-brass font-bold">NOW &rarr; JOB</span>
+          <span class="text-zinc-600">|</span>
+          <span id="headerCountdownText" class="text-white font-semibold">T-30 DAYS</span>
+        </div>
+
+        <button
+          id="btnOpenSubmissionKitTop"
+          type="button"
+          class="tactile-btn px-3 py-2 rounded-lg bg-[#1C2028] hover:bg-[#252A34] border border-white/15 text-xs font-mono font-semibold text-[#F4EFE3] flex items-center gap-1.5"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+          </svg>
+          <span class="hidden sm:inline">Submission Kit</span>
+          <span class="sm:hidden">Kit</span>
+        </button>
+
+        <button
+          id="btnQuickCoverTop"
+          type="button"
+          class="tactile-btn px-3 py-2 rounded-lg bg-ticket-terracotta hover:bg-[#d8573b] text-white text-xs font-mono font-bold tracking-wide flex items-center gap-1.5"
+          title="Download 1800x1200 Handshake Showcase Cover PNG"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span class="hidden sm:inline">3:2 Cover</span>
+          <span class="sm:hidden">Cover</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN TWO-COLUMN STUDIO WORKSPACE -->
+  <main class="flex-1 max-w-[1620px] w-full mx-auto px-4 sm:px-6 py-5 lg:py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+    <!-- LEFT / CENTER STAGE: LIVE INTERACTIVE PREVIEW -->
+    <section class="lg:col-span-7 flex flex-col gap-4 lg:sticky lg:top-20">
+
+      <!-- Stage Toolbar: Device Tabs + Overlay Tabs -->
+      <div class="studio-panel rounded-2xl p-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <!-- Device Switcher -->
+        <div class="flex items-center gap-1 p-1 rounded-xl studio-recess" role="tablist" aria-label="Device Format">
+          <button
+            type="button"
+            data-mode="phone"
+            class="mode-tab flex-1 sm:flex-none px-3 py-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="6" y="2" width="12" height="20" rx="3" />
+              <line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round" />
+            </svg>
+            Phone
+          </button>
+          <button
+            type="button"
+            data-mode="desktop"
+            class="mode-tab flex-1 sm:flex-none px-3 py-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            Desktop
+          </button>
+          <button
+            type="button"
+            data-mode="cover"
+            class="mode-tab flex-1 sm:flex-none px-3 py-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10.5" r="1.5" />
+              <polyline points="21 15 16 10 5 19" />
+            </svg>
+            3:2 Cover
+          </button>
+        </div>
+
+        <!-- Overlay Switcher -->
+        <div id="overlayTabsWrap" class="flex items-center gap-1 p-1 rounded-xl studio-recess" role="tablist" aria-label="Overlay Mode">
+          <button
+            type="button"
+            data-overlay="os"
+            class="overlay-tab flex-1 sm:flex-none px-2.5 py-2 rounded-lg text-[11px] font-mono font-semibold whitespace-nowrap"
+          >
+            OS Clock
+          </button>
+          <button
+            type="button"
+            data-overlay="xray"
+            class="overlay-tab flex-1 sm:flex-none px-2.5 py-2 rounded-lg text-[11px] font-mono font-semibold whitespace-nowrap"
+          >
+            Safe-Zone X-Ray
+          </button>
+          <button
+            type="button"
+            data-overlay="pure"
+            class="overlay-tab flex-1 sm:flex-none px-2.5 py-2 rounded-lg text-[11px] font-mono font-semibold whitespace-nowrap"
+          >
+            Pure Wallpaper
+          </button>
+        </div>
+      </div>
+
+      <!-- LIVE STAGE DISPLAY ARENA -->
+      <div class="studio-panel rounded-2xl p-4 sm:p-6 md:p-7 flex flex-col items-center justify-center min-h-[560px] sm:min-h-[650px] relative overflow-hidden">
+        <!-- Top Calibration Telemetry Strip -->
+        <div class="w-full flex flex-wrap items-center justify-between gap-2 pb-2 text-[10px] font-mono tracking-widest uppercase text-zinc-400">
+          <span id="stageSpecCaption">1290 &times; 2796 PX &middot; 19.5:9 IPHONE 16 PRO</span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span id="stageModeBadge">LIVE iOS LOCK SCREEN</span>
+          </span>
+        </div>
+
+        <!-- ===============================================================
+             STAGE VIEW 1: PHOTOREALISTIC IPHONE 16 PRO LIVE PREVIEW
+             =============================================================== -->
+        <div id="stagePhone" class="w-full flex items-center justify-center py-3">
+          <!-- Outer Brushed Titanium Band (4px) + Physical Side Buttons + Antenna Breaks -->
+          <div class="iphone16-titanium relative rounded-[52px] p-[4px] w-[294px] sm:w-[328px] md:w-[346px] max-w-full">
+            <!-- Matte Antenna Bands across Titanium Rim -->
+            <div class="pointer-events-none absolute left-0 top-[66px] w-[4px] h-[5px] bg-[#242321]/90"></div>
+            <div class="pointer-events-none absolute right-0 top-[66px] w-[4px] h-[5px] bg-[#242321]/90"></div>
+            <div class="pointer-events-none absolute left-0 bottom-[66px] w-[4px] h-[5px] bg-[#242321]/90"></div>
+            <div class="pointer-events-none absolute right-0 bottom-[66px] w-[4px] h-[5px] bg-[#242321]/90"></div>
+
+            <!-- Left Physical Hardware Buttons: Action, Volume Up, Volume Down -->
+            <div class="pointer-events-none iphone16-side-btn-left absolute -left-[2.5px] top-[120px] w-[2.5px] h-[24px] rounded-l-[2px]"></div>
+            <div class="pointer-events-none iphone16-side-btn-left absolute -left-[2.5px] top-[160px] w-[2.5px] h-[46px] rounded-l-[2px]"></div>
+            <div class="pointer-events-none iphone16-side-btn-left absolute -left-[2.5px] top-[218px] w-[2.5px] h-[46px] rounded-l-[2px]"></div>
+            <!-- Right Physical Hardware Button: Side / Power -->
+            <div class="pointer-events-none iphone16-side-btn-right absolute -right-[2.5px] top-[180px] w-[2.5px] h-[72px] rounded-r-[2px]"></div>
+
+            <!-- Ultra-Thin Uniform Jet-Black OLED Bezel (8px) -->
+            <div class="iphone16-bezel rounded-[48px] p-[8px]">
+              <!-- Exact Concentric Inner Screen Clip (40px radius, 1290:2796 ratio) -->
+              <div class="relative w-full aspect-[1290/2796] rounded-[40px] overflow-hidden bg-black select-none">
+                <!-- Live High-DPI Boarding Pass Canvas -->
+                <canvas id="canvasPhone" class="w-full h-full block"></canvas>
+
+                <!-- Subtle Ceramic Shield Diagonal Glass Reflection Sheen (Top-Right) -->
+                <div
+                  class="pointer-events-none absolute inset-0"
+                  style="background: linear-gradient(218deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.025) 22%, rgba(255,255,255,0) 45%);"
+                ></div>
+
+                <!-- OVERLAY A: AUTHENTIC LIVE TICKING iOS LOCK SCREEN -->
+                <div id="phoneOsOverlay" class="pointer-events-none absolute inset-0 flex flex-col justify-between ios-font">
+                  <!-- Top Status Bar Vertically Aligned with Dynamic Island -->
+                  <div class="w-full px-[4.2%] pt-[2.1%] grid grid-cols-[1fr_auto_1fr] items-center">
+                    <!-- Left Ear: Bold SF-Style Live Time -->
+                    <div class="flex items-center justify-center">
+                      <span class="js-ios-status-ink text-[12px] font-semibold tracking-tight leading-none js-live-time">09:41</span>
+                    </div>
+
+                    <!-- Center: Sleek Matte OLED Dynamic Island + Dark Sapphire TrueDepth Lens -->
+                    <div class="w-[86px] sm:w-[92px] h-[23px] sm:h-[25px] bg-black rounded-full border border-white/10 shadow-sm flex items-center justify-end pr-[7px]">
+                      <div class="w-[10px] h-[10px] rounded-full bg-[#090D16] border border-white/10 flex items-center justify-center">
+                        <div class="w-[6px] h-[6px] rounded-full bg-gradient-to-br from-[#2A539B] via-[#0F2045] to-[#040710] relative">
+                          <span class="absolute top-[1px] left-[1px] w-[1.8px] h-[1.8px] rounded-full bg-sky-200/80"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Right Ear: 4-Bar Cellular + 3-Arc Wi-Fi + Rounded Battery with Nub -->
+                    <div class="js-ios-status-ink flex items-center justify-center gap-[4px]">
+                      <svg width="14" height="10" viewBox="0 0 17 12" fill="currentColor" aria-hidden="true">
+                        <rect x="0.5" y="7.5" width="2.8" height="4" rx="1" />
+                        <rect x="4.8" y="5.2" width="2.8" height="6.3" rx="1" />
+                        <rect x="9.1" y="2.8" width="2.8" height="8.7" rx="1" />
+                        <rect x="13.4" y="0.5" width="2.8" height="11" rx="1" />
+                      </svg>
+                      <svg width="13" height="10" viewBox="0 0 16 12" fill="none" stroke="currentColor" aria-hidden="true">
+                        <path d="M1.4 3.8C5.1 0.6 10.9 0.6 14.6 3.8" stroke-width="1.65" stroke-linecap="round" />
+                        <path d="M3.9 6.5C6.2 4.4 9.8 4.4 12.1 6.5" stroke-width="1.65" stroke-linecap="round" />
+                        <circle cx="8" cy="10" r="1.45" fill="currentColor" stroke="none" />
+                      </svg>
+                      <svg width="22" height="11" viewBox="0 0 27 13" fill="none" aria-hidden="true">
+                        <rect x="1" y="1" width="22" height="11" rx="3.2" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.35" />
+                        <rect x="2.8" y="2.8" width="16.8" height="7.4" rx="1.6" fill="currentColor" />
+                        <path d="M24.3 4.3C25.3 4.6 25.8 5.4 25.8 6.5C25.8 7.6 25.3 8.4 24.3 8.7V4.3Z" fill="currentColor" fill-opacity="0.7" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Live Lock Screen Date & Large Crisp Clock Nestled Inside Recessed Dark Gate Clock Display Bay -->
+                  <div class="absolute left-0 right-0 top-[11.2%] h-[15.2%] flex flex-col items-center justify-center text-center px-6">
+                    <div class="text-[12px] font-medium text-white/90 tracking-tight mb-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] js-live-date">
+                      Friday, Nov 20
+                    </div>
+                    <div class="text-[52px] sm:text-[58px] leading-none font-bold tracking-[-0.03em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] js-live-time">
+                      09:41
+                    </div>
+                  </div>
+
+                  <!-- Bottom iOS Translucent Frosted-Glass Flashlight & Camera Buttons + Home Indicator -->
+                  <div class="w-full px-[9.5%] pb-[2.8%] flex flex-col items-center gap-3.5">
+                    <div class="w-full flex items-center justify-between">
+                      <!-- Bottom-Left Frosted Flashlight Button -->
+                      <div class="w-[38px] h-[38px] sm:w-[40px] sm:h-[40px] rounded-full bg-[rgba(16,22,30,0.56)] backdrop-blur-md border border-white/25 flex items-center justify-center text-white shadow-[0_4px_14px_rgba(0,0,0,0.38)]">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <rect x="8.2" y="2.8" width="7.6" height="2.1" rx="0.7" />
+                          <path d="M8.4 5.7H15.6L14 9V20.1C14 20.8 13.4 21.3 12.7 21.3H11.3C10.6 21.3 10 20.8 10 20.1V9L8.4 5.7Z" />
+                          <rect x="11.3" y="10.8" width="1.4" height="3.2" rx="0.7" fill="rgba(16,22,30,0.8)" />
+                        </svg>
+                      </div>
+                      <!-- Bottom-Right Frosted Camera Button -->
+                      <div class="w-[38px] h-[38px] sm:w-[40px] sm:h-[40px] rounded-full bg-[rgba(16,22,30,0.56)] backdrop-blur-md border border-white/25 flex items-center justify-center text-white shadow-[0_4px_14px_rgba(0,0,0,0.38)]">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.6 5.4C8.9 4.9 9.4 4.6 10 4.6H14C14.6 4.6 15.1 4.9 15.4 5.4L16.3 7H19C20.4 7 21.5 8.1 21.5 9.5V17.5C21.5 18.9 20.4 20 19 20H5C3.6 20 2.5 18.9 2.5 17.5V9.5C2.5 8.1 3.6 7 5 7H7.7L8.6 5.4ZM12 9.7C9.9 9.7 8.2 11.4 8.2 13.5C8.2 15.6 9.9 17.3 12 17.3C14.1 17.3 15.8 15.6 15.8 13.5C15.8 11.4 14.1 9.7 12 9.7ZM17.9 9.3C17.4 9.3 17 9.7 17 10.2C17 10.7 17.4 11.1 17.9 11.1C18.4 11.1 18.8 10.7 18.8 10.2C18.8 9.7 18.4 9.3 17.9 9.3Z" />
+                          <circle cx="12" cy="13.5" r="2.2" />
+                        </svg>
+                      </div>
+                    </div>
+                    <!-- Centered Translucent White Home Indicator Pill -->
+                    <div class="w-[34%] h-[4px] rounded-full bg-white/85 shadow-sm"></div>
+                  </div>
+                </div>
+
+                <!-- OVERLAY B: ENGINEERING SAFE-ZONE X-RAY -->
+                <div id="phoneXrayOverlay" class="pointer-events-none absolute inset-0 hidden flex-col">
+                  <!-- Top Clock Bay Zone (0 - 30.5%) -->
+                  <div class="h-[30.5%] w-full xray-cyan border-b-2 border-dashed border-sky-400 flex items-center justify-center">
+                    <span class="px-2 py-1 rounded bg-black/85 border border-sky-400 text-sky-300 font-mono text-[9.5px] font-bold tracking-wider uppercase shadow">
+                      TOP 30%: OS CLOCK BAY
+                    </span>
+                  </div>
+                  <!-- Middle Milestone Rail Zone (30.5% - 81%) -->
+                  <div class="h-[50.5%] w-full xray-terra border-b-2 border-dashed border-ticket-terracotta flex items-end justify-center pb-2">
+                    <span class="px-2 py-1 rounded bg-black/85 border border-ticket-terracotta text-orange-200 font-mono text-[9.5px] font-bold tracking-wider uppercase shadow">
+                      MID 50%: ROUTE &amp; 5-GATE RAILS
+                    </span>
+                  </div>
+                  <!-- Bottom Icon Clearance Zone (81% - 100%) -->
+                  <div class="h-[19%] w-full xray-green flex items-end justify-between px-3 pb-5 gap-2">
+                    <div class="w-[24%] h-[68%] xray-gold border border-dashed border-yellow-400 rounded-xl flex items-center justify-center">
+                      <span class="text-[8px] font-mono font-bold text-yellow-200 bg-black/85 px-1 py-0.5 rounded text-center leading-tight">
+                        FLASH<br />CLEAR
+                      </span>
+                    </div>
+                    <span class="mb-2 px-2 py-0.5 rounded bg-black/85 border border-emerald-400 text-emerald-300 font-mono text-[8.5px] font-bold uppercase text-center">
+                      BARCODE SAFE
+                    </span>
+                    <div class="w-[24%] h-[68%] xray-gold border border-dashed border-yellow-400 rounded-xl flex items-center justify-center">
+                      <span class="text-[8px] font-mono font-bold text-yellow-200 bg-black/85 px-1 py-0.5 rounded text-center leading-tight">
+                        CAM<br />CLEAR
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             STAGE VIEW 2: DESKTOP 2560x1440 MONITOR PREVIEW
+             =============================================================== -->
+        <div id="stageDesktop" class="w-full hidden flex-col items-center justify-center py-5">
+          <div class="desktop-bezel rounded-2xl p-2.5 sm:p-3.5 w-full max-w-[780px]">
+            <div class="w-1.5 h-1.5 rounded-full bg-zinc-700 mx-auto mb-2 border border-white/10"></div>
+            <div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-black select-none">
+              <canvas id="canvasDesktop" class="w-full h-full block"></canvas>
+
+              <!-- Desktop OS Clock Overlay -->
+              <div id="desktopOsOverlay" class="pointer-events-none absolute inset-0 flex flex-col justify-between ios-font">
+                <div class="absolute left-[28%] right-[28%] top-[5.8%] h-[23.8%] flex flex-col items-center justify-center text-center">
+                  <div class="text-[10px] sm:text-xs font-medium text-white/85 js-live-date">Friday, Nov 20</div>
+                  <div class="text-3xl sm:text-5xl md:text-[54px] leading-none font-bold tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)] mt-0.5 js-live-time">
+                    09:41
+                  </div>
+                </div>
+                <!-- Bottom Desktop Login Pill -->
+                <div class="mt-auto mb-[2.6%] mx-auto flex items-center gap-2 px-3 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/15">
+                  <span class="w-4 h-4 rounded-full bg-ticket-terracotta flex items-center justify-center text-[8px] font-bold text-white">F</span>
+                  <span class="text-[9px] sm:text-[10px] text-white/90">Touch ID or Enter Password</span>
+                </div>
+              </div>
+
+              <!-- Desktop X-Ray Overlay -->
+              <div id="desktopXrayOverlay" class="pointer-events-none absolute inset-0 hidden flex-col">
+                <div class="h-[32%] w-full xray-cyan border-b-2 border-dashed border-sky-400 flex items-center justify-center">
+                  <span class="px-2.5 py-1 rounded bg-black/85 border border-sky-400 text-sky-300 font-mono text-[10px] font-bold uppercase">
+                    TOP 32%: DESKTOP OS CLOCK BAY
+                  </span>
+                </div>
+                <div class="h-[53%] w-full xray-terra border-b-2 border-dashed border-ticket-terracotta flex items-end justify-center pb-2">
+                  <span class="px-2.5 py-1 rounded bg-black/85 border border-ticket-terracotta text-orange-200 font-mono text-[10px] font-bold uppercase">
+                    MID 53%: BOARDING PASS &amp; MILESTONE DECK
+                  </span>
+                </div>
+                <div class="h-[15%] w-full xray-green flex items-center justify-center">
+                  <span class="px-2.5 py-1 rounded bg-black/85 border border-emerald-400 text-emerald-300 font-mono text-[10px] font-bold uppercase">
+                    BOTTOM 15%: LOGIN AVATAR &amp; TASKBAR CLEARANCE
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Stand Accent -->
+          <div class="w-24 h-3 bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-b-md border-x border-b border-white/10"></div>
+          <div class="w-40 h-1.5 bg-zinc-700/90 rounded-full mt-0.5 shadow-lg"></div>
+        </div>
+
+        <!-- ===============================================================
+             STAGE VIEW 3: 3:2 HANDSHAKE SHOWCASE COVER (1800x1200)
+             =============================================================== -->
+        <div id="stageCover" class="w-full hidden flex-col items-center justify-center py-3 gap-3">
+          <div class="relative w-full max-w-[780px] rounded-xl overflow-hidden border border-white/15 shadow-2xl bg-black">
+            <canvas id="canvasCover" class="w-full aspect-[3/2] block"></canvas>
+
+            <!-- Optional Simulated Handshake View-Count Badge Overlay (Top-Left Safe Zone Verification) -->
+            <div
+              id="handshakeBadgeSim"
+              class="pointer-events-none hidden absolute top-[3.6%] left-[2.6%] px-3 py-1 rounded-full bg-white text-[#111827] shadow-lg border border-black/10 items-center gap-1.5 text-xs font-sans font-bold"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span>1.4K</span>
+            </div>
+          </div>
+
+          <!-- Handshake Top-Left Badge Simulator Toggle -->
+          <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+            <button
+              id="btnToggleBadgeSim"
+              type="button"
+              class="tactile-btn px-3 py-1.5 rounded-lg bg-[#1A1D24] hover:bg-[#232730] border border-white/15 text-zinc-200 flex items-center gap-2"
+            >
+              <span id="badgeSimDot" class="w-2 h-2 rounded-full bg-zinc-500"></span>
+              <span>Preview Handshake &ldquo;1.4K&rdquo; Badge</span>
+            </button>
+            <span class="text-zinc-400">Top-left 460&times;180 px kept clear of text</span>
+          </div>
+        </div>
+
+        <!-- Bottom Progress Footer -->
+        <div class="w-full mt-3 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-zinc-400">
+          <span id="activeEditionFooter">EDITION: ORIENT CREAM</span>
+          <span id="stageProgressSummary" class="text-zinc-200">1 OF 5 GATES CLEARED &middot; 20%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: EXPORT DOCK & LIVE CUSTOMIZATION STUDIO -->
+    <aside class="lg:col-span-5 flex flex-col gap-4">
+
+      <!-- 1. 1-CLICK EXPORT DOCK -->
+      <div class="studio-panel rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-[#F4EFE3] flex items-center gap-2">
+            <span class="w-2 h-2 rounded-sm bg-ticket-terracotta"></span>
+            1-Click Native Exports
+          </h2>
+          <span class="text-[10px] font-mono text-zinc-500">FRAMELESS PNG + .ICS</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <!-- Phone PNG -->
+          <button
+            id="btnDownloadPhone"
+            type="button"
+            class="tactile-btn group px-3.5 py-3 rounded-xl bg-[#1B1F27] hover:bg-[#242934] border border-white/10 text-left flex items-center justify-between gap-2"
+          >
+            <div>
+              <div class="text-xs font-semibold text-white group-hover:text-[#F3A694] transition-colors">
+                Download Phone PNG
+              </div>
+              <div class="text-[10px] font-mono text-zinc-400">1290 &times; 2796 Pure Wallpaper</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-zinc-400 group-hover:text-white shrink-0" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
+
+          <!-- Desktop PNG -->
+          <button
+            id="btnDownloadDesktop"
+            type="button"
+            class="tactile-btn group px-3.5 py-3 rounded-xl bg-[#1B1F27] hover:bg-[#242934] border border-white/10 text-left flex items-center justify-between gap-2"
+          >
+            <div>
+              <div class="text-xs font-semibold text-white group-hover:text-[#F3A694] transition-colors">
+                Download Desktop PNG
+              </div>
+              <div class="text-[10px] font-mono text-zinc-400">2560 &times; 1440 Pure Wallpaper</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-zinc-400 group-hover:text-white shrink-0" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
+
+          <!-- 3:2 Cover PNG -->
+          <button
+            id="btnDownloadCover"
+            type="button"
+            class="tactile-btn group px-3.5 py-3 rounded-xl bg-ticket-terracotta hover:bg-[#d8573b] border border-orange-300/25 text-left flex items-center justify-between gap-2"
+          >
+            <div>
+              <div class="text-xs font-bold text-white">Download 3:2 Cover PNG</div>
+              <div class="text-[10px] font-mono text-orange-100/90">1800 &times; 1200 Handshake Cover</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="text-white shrink-0" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
+
+          <!-- Daily .ICS Calendar Reminders -->
+          <button
+            id="btnDownloadIcs"
+            type="button"
+            class="tactile-btn group px-3.5 py-3 rounded-xl bg-ticket-forest/25 hover:bg-ticket-forest/40 border border-emerald-500/40 text-left flex items-center justify-between gap-2"
+          >
+            <div>
+              <div class="text-xs font-semibold text-emerald-200">Daily .ICS Reminders</div>
+              <div class="text-[10px] font-mono text-emerald-300/80">Daily Check-In + 5 Gates</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-emerald-300 shrink-0" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. COLLECTOR TICKET EDITIONS -->
+      <div class="studio-panel rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-300">
+            01 // Collector Ticket Edition
+          </h2>
+          <span class="text-[10px] font-mono text-zinc-500">COTTON PAPER GRAIN</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <button
+            type="button"
+            data-edition="orient"
+            class="edition-btn tactile-btn p-3 rounded-xl text-left border flex flex-col gap-2"
+          >
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-[#F4EFE3] border border-black/20"></span>
+              <span class="w-3 h-3 rounded-full bg-[#182230]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#C84B31]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#236B4E]"></span>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Orient Cream</div>
+              <div class="text-[10px] font-mono text-zinc-400">Vintage Cotton</div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            data-edition="midnight"
+            class="edition-btn tactile-btn p-3 rounded-xl text-left border flex flex-col gap-2"
+          >
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-[#131B29] border border-white/25"></span>
+              <span class="w-3 h-3 rounded-full bg-[#D4AF6A]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#D95A3F]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#38A17B]"></span>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Midnight Sleeper</div>
+              <div class="text-[10px] font-mono text-zinc-400">Pullman Navy</div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            data-edition="kyoto"
+            class="edition-btn tactile-btn p-3 rounded-xl text-left border flex flex-col gap-2"
+          >
+            <div class="flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-[#F7F5EE] border border-black/20"></span>
+              <span class="w-3 h-3 rounded-full bg-[#1F2421]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#C93B2B]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3A6B4C]"></span>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Kyoto Rail</div>
+              <div class="text-[10px] font-mono text-zinc-400">Washi &amp; Sumi</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. REAL-DEADLINE PRESETS & ROUTE TICKET CONFIG -->
+      <div class="studio-panel rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
+        <div>
+          <div class="flex items-center justify-between mb-2.5">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-300">
+              02 // Real-Deadline Presets
+            </h2>
+            <span class="text-[10px] font-mono text-zinc-500">4 READY ROUTES</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" data-preset="career" class="preset-btn tactile-btn px-2.5 py-2.5 rounded-xl text-[11px] font-mono font-semibold border text-center">
+              Dream Role Launch
+            </button>
+            <button type="button" data-preset="finals" class="preset-btn tactile-btn px-2.5 py-2.5 rounded-xl text-[11px] font-mono font-semibold border text-center">
+              Finals Express
+            </button>
+            <button type="button" data-preset="savings" class="preset-btn tactile-btn px-2.5 py-2.5 rounded-xl text-[11px] font-mono font-semibold border text-center">
+              Savings Sprint $1K
+            </button>
+            <button type="button" data-preset="winter" class="preset-btn tactile-btn px-2.5 py-2.5 rounded-xl text-[11px] font-mono font-semibold border text-center">
+              Winter Escape
+            </button>
+          </div>
+        </div>
+
+        <!-- Route & Transport Fields -->
+        <div class="grid grid-cols-2 sm:grid-cols-12 gap-3 pt-3 border-t border-white/10">
+          <div class="col-span-1 sm:col-span-3">
+            <label for="inputOrigin" class="block text-[10px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Origin</label>
+            <input
+              id="inputOrigin"
+              type="text"
+              maxlength="4"
+              class="w-full px-2.5 py-2 rounded-lg studio-recess text-sm font-serif font-bold uppercase tracking-wider text-white focus:outline-none focus:border-ticket-terracotta"
+            />
+          </div>
+
+          <div class="col-span-1 sm:col-span-3">
+            <label for="inputDest" class="block text-[10px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Destination</label>
+            <input
+              id="inputDest"
+              type="text"
+              maxlength="4"
+              class="w-full px-2.5 py-2 rounded-lg studio-recess text-sm font-serif font-bold uppercase tracking-wider text-[#F3A694] focus:outline-none focus:border-ticket-terracotta"
+            />
+          </div>
+
+          <div class="col-span-2 sm:col-span-6">
+            <label for="inputTargetDate" class="block text-[10px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Target Deadline</label>
+            <input
+              id="inputTargetDate"
+              type="date"
+              class="w-full px-2.5 py-2 rounded-lg studio-recess text-xs font-mono text-white focus:outline-none focus:border-ticket-terracotta"
+            />
+          </div>
+
+          <div class="col-span-2 sm:col-span-12">
+            <label class="block text-[10px] font-mono uppercase tracking-wider text-zinc-400 mb-1.5">Transport Emblem</label>
+            <div class="grid grid-cols-4 gap-2">
+              <button type="button" data-transport="plane" class="transport-btn tactile-btn py-2 rounded-lg border text-[11px] font-mono font-semibold flex items-center justify-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                </svg>
+                Plane
+              </button>
+              <button type="button" data-transport="train" class="transport-btn tactile-btn py-2 rounded-lg border text-[11px] font-mono font-semibold flex items-center justify-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h2.23l2-2H14l2 2h2v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-3.58-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-7H6V6h5v4zm5.5 7c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-7h-5V6h5v4z" />
+                </svg>
+                Train
+              </button>
+              <button type="button" data-transport="ship" class="transport-btn tactile-btn py-2 rounded-lg border text-[11px] font-mono font-semibold flex items-center justify-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99 2.52 1.29 5.48 1.29 8 0 1.26.65 2.62.99 4 .99h2v-2h-2zM3.95 19H4c1.6 0 3.02-.88 4-2 .98 1.12 2.4 2 4 2s3.02-.88 4-2c.98 1.12 2.4 2 4 2h.05l1.89-6.68c.08-.26.06-.54-.06-.78s-.34-.42-.6-.5L20 10.62V6c0-1.1-.9-2-2-2h-3V1H9v3H6c-1.1 0-2 .9-2 2v4.62l-1.29.42c-.26.08-.48.26-.6.5s-.15.52-.06.78L3.95 19zM6 6h12v3.97L12 8 6 9.97V6z" />
+                </svg>
+                Ship
+              </button>
+              <button type="button" data-transport="rocket" class="transport-btn tactile-btn py-2 rounded-lg border text-[11px] font-mono font-semibold flex items-center justify-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2c3.87 2.2 6 6.23 6 10.5 0 1.68-.36 3.24-1 4.65l2.5 2.5-1.41 1.41-3.1-3.1c-.94.34-1.95.54-2.99.54s-2.05-.2-2.99-.54l-3.1 3.1-1.41-1.41 2.5-2.5c-.64-1.41-1-2.97-1-4.65C6 8.23 8.13 4.2 12 2zm0 6.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                </svg>
+                Rocket
+              </button>
+            </div>
+          </div>
+
+          <div class="col-span-2 sm:col-span-12">
+            <label for="inputSubtitle" class="block text-[10px] font-mono uppercase tracking-wider text-zinc-400 mb-1">Route Banner Subtitle</label>
+            <input
+              id="inputSubtitle"
+              type="text"
+              maxlength="42"
+              class="w-full px-3 py-2 rounded-lg studio-recess text-xs font-mono uppercase text-zinc-100 focus:outline-none focus:border-ticket-terracotta"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. INTERACTIVE 5-GATE MILESTONE EDITOR -->
+      <div class="studio-panel rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-300">
+              03 // 5 Boarding Gates (Milestones)
+            </h2>
+            <p class="text-[11px] text-zinc-400 mt-0.5">
+              Tap the stamp switch to toggle <span class="text-emerald-400 font-mono">CLEARED</span> &amp; advance <span class="text-[#F3A694] font-mono">NEXT GATE</span>
+            </p>
+          </div>
+          <button
+            id="btnSortGates"
+            type="button"
+            class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] font-mono text-zinc-300 shrink-0"
+          >
+            Sort Date &uarr;
+          </button>
+        </div>
+
+        <div id="milestoneListContainer" class="flex flex-col gap-2.5">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- HANDSHAKE SUBMISSION KIT MODAL -->
+  <div
+    id="submissionModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="submissionModalTitle"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+  >
+    <div class="studio-panel rounded-2xl max-w-xl w-full p-5 sm:p-6 flex flex-col gap-4 max-h-[90vh] overflow-y-auto border border-ticket-brass/30">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-ticket-brass">Handshake AI Skills Studio &times; Google</span>
+          <h2 id="submissionModalTitle" class="font-serif text-xl font-bold text-[#F4EFE3] mt-0.5">
+            Contest Submission Kit
+          </h2>
+        </div>
+        <button
+          id="btnCloseModal"
+          type="button"
+          aria-label="Close modal"
+          class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Copyable Project Title -->
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <label for="kitTitleInput" class="text-[11px] font-mono uppercase tracking-wider text-zinc-400">Project Title</label>
+          <button id="btnCopyTitle" type="button" class="text-[11px] font-mono font-semibold text-ticket-brass hover:text-white">
+            Copy Title
+          </button>
+        </div>
+        <input
+          id="kitTitleInput"
+          type="text"
+          value="FINAL BOARDING — Vintage Express Countdown Lock Screen Studio"
+          class="w-full px-3 py-2 rounded-lg studio-recess text-xs font-semibold text-white focus:outline-none focus:border-ticket-brass"
+        />
+      </div>
+
+      <!-- Copyable Human-Sounding Description (<500 chars with live counter) -->
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <label for="kitDescTextarea" class="text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+            Project Description (Max 500 chars)
+          </label>
+          <div class="flex items-center gap-3">
+            <span id="kitCharCounter" class="text-[11px] font-mono text-emerald-400">0 / 500</span>
+            <button id="btnCopyDesc" type="button" class="text-[11px] font-mono font-semibold text-ticket-brass hover:text-white">
+              Copy Description
+            </button>
+          </div>
+        </div>
+        <textarea
+          id="kitDescTextarea"
+          rows="5"
+          maxlength="500"
+          class="w-full px-3 py-2.5 rounded-lg studio-recess text-xs leading-relaxed text-zinc-100 focus:outline-none focus:border-ticket-brass"
+        >I am working toward my Dec 20 tech-role and portfolio deadline, and I wanted a lock screen that feels motivating instead of stressful. With Gemini, I backward-mapped 5 realistic weekly gates and turned them into an interactive vintage boarding pass studio. The phone clock sits right inside the Gate Display bay, milestones stamp CLEARED as I finish them, and anyone can export crisp Phone/Desktop PNGs plus daily .ics reminders. Designing around real iOS safe zones made it feel genuinely usable.</textarea>
+      </div>
+
+      <!-- Handshake Submission Checklist -->
+      <div class="rounded-xl p-3.5 bg-[#0C0E11] border border-white/10 flex flex-col gap-2">
+        <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-300 font-bold mb-0.5">
+          Required Handshake Submission Checklist
+        </div>
+        <label class="flex items-start gap-2.5 text-xs text-zinc-300 cursor-pointer">
+          <input type="checkbox" class="mt-0.5 accent-[#C84B31]" />
+          <span><strong>Project Link/URL:</strong> Paste your public Gemini Canvas shared URL into &ldquo;Your project&rdquo;.</span>
+        </label>
+        <label class="flex items-start gap-2.5 text-xs text-zinc-300 cursor-pointer">
+          <input type="checkbox" class="mt-0.5 accent-[#C84B31]" />
+          <span><strong>3:2 Cover Image:</strong> Upload the downloaded <code>1800&times;1200</code> cover PNG to &ldquo;Preview image&rdquo;.</span>
+        </label>
+        <label class="flex items-start gap-2.5 text-xs text-zinc-300 cursor-pointer">
+          <input type="checkbox" class="mt-0.5 accent-[#C84B31]" />
+          <span><strong>Profile Visibility:</strong> Set Handshake profile visibility to <strong>Community</strong>.</span>
+        </label>
+        <label class="flex items-start gap-2.5 text-xs text-zinc-300 cursor-pointer">
+          <input type="checkbox" class="mt-0.5 accent-[#C84B31]" />
+          <span><strong>Enter Challenge:</strong> Check the <strong>Share to Showcase</strong> box before clicking Submit.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST STATUS BANNER (Zero alert() / confirm() calls) -->
+  <div
+    id="toastBanner"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#181B22]/95 border border-white/15 shadow-2xl backdrop-blur-md text-xs font-mono text-white"
+  >
+    <span id="toastIndicator" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastText">Ready</span>
+  </div>
+
+  <!-- =========================================================================
+       CORE STUDIO APPLICATION ENGINE (PURE VANILLA JS + HTML5 CANVAS)
+       ========================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* -----------------------------------------------------------------------
+       * 1. COLLECTOR TICKET EDITIONS & PRESETS
+       * ----------------------------------------------------------------------- */
+      const EDITIONS = {
+        orient: {
+          id: 'orient',
+          name: 'Orient Cream',
+          paperBg: '#F4EFE3',
+          paperShade: '#EAE2D0',
+          cardBg: '#FAF7F0',
+          cardBorder: '#D9CEB8',
+          navy: '#182230',
+          navyDeep: '#131C28',
+          terracotta: '#C84B31',
+          forest: '#236B4E',
+          brass: '#B9975B',
+          inkPrimary: '#182230',
+          inkSecondary: '#545D6A',
+          inkMuted: '#868C94',
+          bayBgTop: '#1A2433',
+          bayBgBottom: '#111924',
+          bayBorder: '#B9975B',
+          bayLabel: '#8E99A8',
+          notchBg: '#121312',
+          tearLine: '#C4B89E',
+          statusBarInk: '#1B2330',
+          isDark: false,
+          grainAlpha: 0.04,
+        },
+        midnight: {
+          id: 'midnight',
+          name: 'Midnight Sleeper',
+          paperBg: '#131B29',
+          paperShade: '#0E1420',
+          cardBg: '#1B2537',
+          cardBorder: '#2E3C54',
+          navy: '#0D131E',
+          navyDeep: '#090D15',
+          terracotta: '#D95A3F',
+          forest: '#38A17B',
+          brass: '#D4AF6A',
+          inkPrimary: '#F3EDE0',
+          inkSecondary: '#B3BDCE',
+          inkMuted: '#78859B',
+          bayBgTop: '#0B101A',
+          bayBgBottom: '#070B12',
+          bayBorder: '#D4AF6A',
+          bayLabel: '#8E9BB0',
+          notchBg: '#090A0C',
+          tearLine: '#33435E',
+          statusBarInk: '#F5F1E8',
+          isDark: true,
+          grainAlpha: 0.032,
+        },
+        kyoto: {
+          id: 'kyoto',
+          name: 'Kyoto Rail',
+          paperBg: '#F7F5EE',
+          paperShade: '#ECE8DC',
+          cardBg: '#FDFCF8',
+          cardBorder: '#D7D2C5',
+          navy: '#1F2421',
+          navyDeep: '#171B19',
+          terracotta: '#C93B2B',
+          forest: '#3A6B4C',
+          brass: '#B29258',
+          inkPrimary: '#1F2421',
+          inkSecondary: '#565C57',
+          inkMuted: '#8A8D87',
+          bayBgTop: '#1E2320',
+          bayBgBottom: '#141816',
+          bayBorder: '#B29258',
+          bayLabel: '#929994',
+          notchBg: '#121312',
+          tearLine: '#C7C1B2',
+          statusBarInk: '#1B2330',
+          isDark: false,
+          grainAlpha: 0.038,
+        },
+      };
+
+      const PRESETS = {
+        career: {
+          id: 'career',
+          origin: 'NOW',
+          dest: 'JOB',
+          transport: 'plane',
+          subtitle: 'TECH ROLE & PORTFOLIO SPRINT',
+          targetDate: '2026-12-20',
+          milestones: [
+            {
+              date: '2026-11-20',
+              title: 'Ship 2 Live Portfolio Demos',
+              note: 'Deploy interactive case studies & clean READMEs',
+              done: true,
+            },
+            {
+              date: '2026-11-28',
+              title: 'Tailor Resume & ATS Audit',
+              note: 'Quantify impact metrics & align target keywords',
+              done: false,
+            },
+            {
+              date: '2026-12-06',
+              title: 'Complete 30 Core Coding Drills',
+              note: 'Timed DSA patterns, APIs & system design',
+              done: false,
+            },
+            {
+              date: '2026-12-13',
+              title: 'Send 25 Targeted Outreach Notes',
+              note: 'Connect with hiring managers & alumni referrals',
+              done: false,
+            },
+            {
+              date: '2026-12-20',
+              title: 'Final Boarding: Interview Ready',
+              note: 'Mock debrief, story bank & calm pre-call reset',
+              done: false,
+            },
+          ],
+        },
+        finals: {
+          id: 'finals',
+          origin: 'SEM',
+          dest: 'DONE',
+          transport: 'train',
+          subtitle: 'FALL SEMESTER FINALS SPRINT',
+          targetDate: '2026-12-15',
+          milestones: [
+            {
+              date: '2026-11-20',
+              title: 'Audit Syllabi & Past Papers',
+              note: 'Map exam weights and flag high-yield topics',
+              done: true,
+            },
+            {
+              date: '2026-11-26',
+              title: 'Condense Core Study Sheets',
+              note: 'Build 1-page formula & concept cheat sheets',
+              done: false,
+            },
+            {
+              date: '2026-12-02',
+              title: 'Run Timed Practice Exam #1',
+              note: 'Simulate real test timing and log error gaps',
+              done: false,
+            },
+            {
+              date: '2026-12-09',
+              title: 'Drill Weak Units & Lab Notes',
+              note: 'Close remaining blind spots with active recall',
+              done: false,
+            },
+            {
+              date: '2026-12-15',
+              title: 'Final Boarding: Exam Day Ready',
+              note: 'Light flashcard pass & full 8-hour sleep reset',
+              done: false,
+            },
+          ],
+        },
+        savings: {
+          id: 'savings',
+          origin: '000',
+          dest: '1K',
+          transport: 'ship',
+          subtitle: 'EMERGENCY FUND CHALLENGE',
+          targetDate: '2026-12-31',
+          milestones: [
+            {
+              date: '2026-11-20',
+              title: 'Open Vault & Set Auto-Rule',
+              note: 'Separate emergency account with $100 kick-off',
+              done: true,
+            },
+            {
+              date: '2026-11-30',
+              title: 'Trim Subs & Lock First $300',
+              note: 'Pause unused apps and redirect weekly spend',
+              done: false,
+            },
+            {
+              date: '2026-12-10',
+              title: 'Complete Side Sprint (+$250)',
+              note: 'Channel freelance or weekend task payouts straight in',
+              done: false,
+            },
+            {
+              date: '2026-12-20',
+              title: 'Cross $750 Checkpoint',
+              note: 'No-spend week review and budget rebalance',
+              done: false,
+            },
+            {
+              date: '2026-12-31',
+              title: 'Final Boarding: $1,000 Locked',
+              note: 'Verify full buffer & roll momentum into 2027',
+              done: false,
+            },
+          ],
+        },
+        winter: {
+          id: 'winter',
+          origin: 'WRK',
+          dest: 'MTN',
+          transport: 'plane',
+          subtitle: 'GUILT-FREE HOLIDAY TRIP',
+          targetDate: '2026-12-22',
+          milestones: [
+            {
+              date: '2026-11-20',
+              title: 'Lock Transit & Stay Bookings',
+              note: 'Confirm tickets, permits & hotel check-in times',
+              done: true,
+            },
+            {
+              date: '2026-11-28',
+              title: 'Freeze Year-End Deliverables',
+              note: 'Finish priority projects ahead of December rush',
+              done: false,
+            },
+            {
+              date: '2026-12-06',
+              title: 'Pack Cold-Weather Gear List',
+              note: 'Layers, power bank, offline maps & travel docs',
+              done: false,
+            },
+            {
+              date: '2026-12-14',
+              title: 'Clear Inbox & Team Handoff',
+              note: 'Document open items and schedule status updates',
+              done: false,
+            },
+            {
+              date: '2026-12-22',
+              title: 'Final Boarding: OOO Activated',
+              note: 'Mute work notifications and head to the gate',
+              done: false,
+            },
+          ],
+        },
+      };
+
+      /* -----------------------------------------------------------------------
+       * 2. APPLICATION STATE
+       * ----------------------------------------------------------------------- */
+      const state = {
+        mode: 'phone',          // 'phone' | 'desktop' | 'cover'
+        overlay: 'os',          // 'os' | 'xray' | 'pure'
+        editionId: 'orient',    // 'orient' | 'midnight' | 'kyoto'
+        presetId: 'career',
+        showBadgeSim: false,
+        origin: PRESETS.career.origin,
+        dest: PRESETS.career.dest,
+        transport: PRESETS.career.transport,
+        subtitle: PRESETS.career.subtitle,
+        targetDate: PRESETS.career.targetDate,
+        milestones: PRESETS.career.milestones.map((m) => ({ ...m })),
+      };
+
+      let cachedPaperGrain = null;
+      let toastTimeout = null;
+
+      /* -----------------------------------------------------------------------
+       * 3. DATE & COUNTDOWN HELPERS
+       * ----------------------------------------------------------------------- */
+      const MONTHS_UPPER = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      const MONTHS_TITLE = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      function parseDateStr(str) {
+        if (!str || typeof str !== 'string') return new Date();
+        const parts = str.split('-').map(Number);
+        if (parts.length !== 3 || parts.some(isNaN)) return new Date();
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+      }
+
+      function getTodayMidnight() {
+        const n = new Date();
+        return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+      }
+
+      function diffDaysFromToday(dateStr) {
+        const d = parseDateStr(dateStr);
+        const today = getTodayMidnight();
+        return Math.round((d - today) / (1000 * 60 * 60 * 24));
+      }
+
+      function formatShortDate(dateStr) {
+        const d = parseDateStr(dateStr);
+        return `${MONTHS_UPPER[d.getMonth()] || 'DEC'} ${String(d.getDate()).padStart(2, '0')}`;
+      }
+
+      function formatTCode(dateStr) {
+        const diff = diffDaysFromToday(dateStr);
+        if (diff >= 0) return `T-${String(diff).padStart(2, '0')}`;
+        return `T+${String(Math.abs(diff)).padStart(2, '0')}`;
+      }
+
+      function getCountdownSummary(dateStr) {
+        const diff = diffDaysFromToday(dateStr);
+        if (diff > 0) {
+          const pad = String(diff).padStart(2, '0');
+          return { code: `T-${pad}`, full: `T-${pad} ${diff === 1 ? 'DAY' : 'DAYS'}`, diff };
+        }
+        if (diff === 0) {
+          return { code: 'T-00', full: 'T-00 TODAY', diff: 0 };
+        }
+        const over = String(Math.abs(diff)).padStart(2, '0');
+        return { code: `T+${over}`, full: `T+${over} DAYS`, diff };
+      }
+
+      function getActiveGateIndex() {
+        return state.milestones.findIndex((m) => !m.done);
+      }
+
+      function getProgressStats() {
+        const total = state.milestones.length;
+        const done = state.milestones.filter((m) => m.done).length;
+        const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        return { done, total, pct };
+      }
+
+      /* -----------------------------------------------------------------------
+       * 4. CANVAS GRAPHICS PRIMITIVES (GRAIN, STAMPS, BARCODE, TRANSPORT ICONS)
+       * ----------------------------------------------------------------------- */
+      function getPaperGrainTile() {
+        if (cachedPaperGrain) return cachedPaperGrain;
+        const c = document.createElement('canvas');
+        c.width = 180;
+        c.height = 180;
+        const g = c.getContext('2d');
+        const img = g.createImageData(180, 180);
+        const d = img.data;
+        // Cotton paper speckle + subtle horizontal/vertical linen fibers
+        for (let y = 0; y < 180; y++) {
+          for (let x = 0; x < 180; x++) {
+            const i = (y * 180 + x) * 4;
+            const noise = Math.floor(Math.random() * 255);
+            const weave = ((x % 4 === 0) || (y % 4 === 0)) ? 14 : 0;
+            const v = Math.min(255, noise + weave);
+            d[i] = v;
+            d[i + 1] = Math.max(0, v - 4);
+            d[i + 2] = Math.max(0, v - 10);
+            d[i + 3] = 255;
+          }
+        }
+        g.putImageData(img, 0, 0);
+        cachedPaperGrain = c;
+        return c;
+      }
+
+      function applyPaperGrain(ctx, w, h, alpha) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = ctx.createPattern(getPaperGrainTile(), 'repeat');
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
+      }
+
+      function roundRectPath(ctx, x, y, w, h, r) {
+        const rad = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rad, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rad);
+        ctx.arcTo(x + w, y + h, x, y + h, rad);
+        ctx.arcTo(x, y + h, x, y, rad);
+        ctx.arcTo(x, y, x + w, y, rad);
+        ctx.closePath();
+      }
+
+      function drawFittedText(ctx, text, x, y, maxW, fontFamily, weight, baseSize, color, align = 'left') {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.textAlign = align;
+        ctx.textBaseline = 'middle';
+
+        let size = baseSize;
+        const minSize = Math.max(11, Math.floor(baseSize * 0.72));
+        ctx.font = `${weight} ${size}px ${fontFamily}`;
+
+        while (ctx.measureText(text).width > maxW && size > minSize) {
+          size -= 1;
+          ctx.font = `${weight} ${size}px ${fontFamily}`;
+        }
+
+        let out = text;
+        if (ctx.measureText(out).width > maxW) {
+          while (out.length > 3 && ctx.measureText(out + '…').width > maxW) {
+            out = out.slice(0, -1);
+          }
+          out += '…';
+        }
+        ctx.fillText(out, x, y);
+        ctx.restore();
+      }
+
+      /**
+       * Draws a tilted (-7deg) double-bordered vintage rubber-ink "CLEARED" stamp.
+       */
+      function drawClearedRubberStamp(ctx, cx, cy, w, h, color) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate((-7 * Math.PI) / 180);
+
+        // Soft ink tint wash
+        roundRectPath(ctx, -w / 2, -h / 2, w, h, 8);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.08;
+        ctx.fill();
+
+        // Outer stamp border
+        ctx.globalAlpha = 0.92;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = Math.max(2.4, h * 0.055);
+        roundRectPath(ctx, -w / 2, -h / 2, w, h, 8);
+        ctx.stroke();
+
+        // Inner hairline stamp border
+        const inset = Math.max(4, h * 0.11);
+        ctx.lineWidth = Math.max(1.2, h * 0.025);
+        roundRectPath(ctx, -w / 2 + inset, -h / 2 + inset, w - inset * 2, h - inset * 2, 5);
+        ctx.stroke();
+
+        // Bold rubber-stamp typography
+        ctx.fillStyle = color;
+        ctx.font = `700 ${Math.round(h * 0.42)}px "JetBrains Mono", monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('CLEARED', 0, 1);
+
+        ctx.restore();
+      }
+
+      /**
+       * Draws a crisp vintage transport emblem (plane / train / ship / rocket).
+       */
+      function drawTransportEmblem(ctx, type, cx, cy, size, color) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        const s = size / 24;
+        ctx.scale(s, s);
+
+        if (type === 'plane') {
+          ctx.beginPath();
+          ctx.moveTo(11, 0);
+          ctx.lineTo(2, -2.5);
+          ctx.lineTo(-4, -10);
+          ctx.lineTo(-7, -10);
+          ctx.lineTo(-3.5, -2.2);
+          ctx.lineTo(-9, -1.6);
+          ctx.lineTo(-11.5, -4.8);
+          ctx.lineTo(-13.5, -4.8);
+          ctx.lineTo(-11.8, 0);
+          ctx.lineTo(-13.5, 4.8);
+          ctx.lineTo(-11.5, 4.8);
+          ctx.lineTo(-9, 1.6);
+          ctx.lineTo(-3.5, 2.2);
+          ctx.lineTo(-7, 10);
+          ctx.lineTo(-4, 10);
+          ctx.lineTo(2, 2.5);
+          ctx.closePath();
+          ctx.fill();
+        } else if (type === 'train') {
+          roundRectPath(ctx, -9, -10, 18, 16, 4);
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.globalAlpha = 0.85;
+          roundRectPath(ctx, -6, -7, 12, 5, 1.5);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(-4.5, 2.2, 1.7, 0, Math.PI * 2);
+          ctx.arc(4.5, 2.2, 1.7, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 2.2;
+          ctx.beginPath();
+          ctx.moveTo(-5, 6.5);
+          ctx.lineTo(-8.5, 11);
+          ctx.moveTo(5, 6.5);
+          ctx.lineTo(8.5, 11);
+          ctx.stroke();
+        } else if (type === 'ship') {
+          ctx.beginPath();
+          ctx.moveTo(-11, 1);
+          ctx.lineTo(11, 1);
+          ctx.lineTo(8, 8);
+          ctx.lineTo(-8, 8);
+          ctx.closePath();
+          ctx.fill();
+          roundRectPath(ctx, -6.5, -5, 13, 5.5, 1.5);
+          ctx.fill();
+          roundRectPath(ctx, -2.5, -10, 5, 5, 1);
+          ctx.fill();
+        } else {
+          // rocket
+          ctx.beginPath();
+          ctx.moveTo(11, 0);
+          ctx.quadraticCurveTo(4, -6, -5, -5.5);
+          ctx.lineTo(-10, -9);
+          ctx.lineTo(-8, -3);
+          ctx.lineTo(-11, 0);
+          ctx.lineTo(-8, 3);
+          ctx.lineTo(-10, 9);
+          ctx.lineTo(-5, 5.5);
+          ctx.quadraticCurveTo(4, 6, 11, 0);
+          ctx.closePath();
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(1.5, 0, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      /**
+       * Draws a crisp deterministic vector boarding-pass barcode.
+       */
+      function drawVectorBarcode(ctx, x, y, w, h, color) {
+        const pattern = [
+          3, 1, 2, 2, 1, 3, 1, 1, 2, 1, 4, 1, 2, 2, 1, 2, 3, 1, 1, 2,
+          2, 1, 3, 2, 1, 1, 4, 1, 2, 1, 2, 3, 1, 2, 1, 3, 2, 1, 1, 3,
+          2, 2, 1, 2, 3, 1, 2, 1, 1, 3, 2, 1, 4, 1, 2, 2, 1, 3,
+        ];
+        const totalUnits = pattern.reduce((a, b) => a + b, 0);
+        const unitW = w / totalUnits;
+        let curX = x;
+
+        ctx.save();
+        ctx.fillStyle = color;
+        pattern.forEach((units, idx) => {
+          const bw = units * unitW;
+          if (idx % 2 === 0) {
+            ctx.fillRect(curX, y, Math.max(1.2, bw), h);
+          }
+          curX += bw;
+        });
+        ctx.restore();
+      }
+
+      /**
+       * Draws a perforated tear-line with semicircular ticket-edge notches.
+       */
+      function drawPerforatedTearLine(ctx, y, w, notchR, lineColor, notchColor) {
+        ctx.save();
+        // Dashed perforation
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 3;
+        ctx.setLineDash([12, 10]);
+        ctx.beginPath();
+        ctx.moveTo(notchR + 14, y);
+        ctx.lineTo(w - notchR - 14, y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Left & Right semicircular cutouts
+        ctx.fillStyle = notchColor;
+        ctx.beginPath();
+        ctx.arc(0, y, notchR, -Math.PI / 2, Math.PI / 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(w, y, notchR, Math.PI / 2, Math.PI * 1.5);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      /**
+       * Draws a 20-segment boarding progress bar.
+       */
+      function drawBoardingProgressBar(ctx, x, y, w, h, pct, ed) {
+        const segs = 20;
+        const gap = Math.max(4, Math.round(w * 0.01));
+        const segW = (w - gap * (segs - 1)) / segs;
+        const filled = Math.round((pct / 100) * segs);
+        const activeSeg = pct < 100 ? Math.min(segs - 1, filled) : -1;
+
+        for (let i = 0; i < segs; i++) {
+          const sx = x + i * (segW + gap);
+          roundRectPath(ctx, sx, y, segW, h, 4);
+          if (i < filled) {
+            ctx.fillStyle = ed.forest;
+          } else if (i === activeSeg) {
+            ctx.fillStyle = ed.terracotta;
+          } else {
+            ctx.fillStyle = ed.isDark ? 'rgba(255,255,255,0.1)' : 'rgba(24,34,48,0.12)';
+          }
+          ctx.fill();
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+       * 5. PHONE WALLPAPER RENDERER (1290 x 2796 NATIVE PURE ARTWORK)
+       * ----------------------------------------------------------------------- */
+      function renderPhoneCanvas(canvas, opts = {}) {
+        const W = 1290;
+        const H = 2796;
+        if (canvas.width !== W || canvas.height !== H) {
+          canvas.width = W;
+          canvas.height = H;
+        }
+        const ctx = canvas.getContext('2d');
+        const ed = EDITIONS[state.editionId];
+        const cd = getCountdownSummary(state.targetDate);
+        const stats = getProgressStats();
+        const activeIdx = getActiveGateIndex();
+        const originCode = (state.origin || 'NOW').toUpperCase();
+        const destCode = (state.dest || 'JOB').toUpperCase();
+
+        // 1. Tactile Cotton-Paper Cardstock Background
+        const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+        bgGrad.addColorStop(0, ed.paperBg);
+        bgGrad.addColorStop(0.55, ed.paperBg);
+        bgGrad.addColorStop(1, ed.paperShade);
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, W, H);
+        applyPaperGrain(ctx, W, H, ed.grainAlpha);
+
+        // Subtle engraved header micro-text below status bar / Dynamic Island
+        drawFittedText(
+          ctx,
+          'EXPRESS PASS  •  PRIORITY ACCESS  •  BOARDING SEQUENCE',
+          W / 2,
+          224,
+          W - 180,
+          '"JetBrains Mono", monospace',
+          '600',
+          20,
+          ed.inkMuted,
+          'center'
+        );
+
+        // 2. RECESSED DARK LCD GATE CLOCK DISPLAY BAY (y: 266 to 796 -> ~28.5% height)
+        const bayX = 66;
+        const bayY = 266;
+        const bayW = W - 132;
+        const bayH = 530;
+        const bayR = 36;
+
+        ctx.save();
+        roundRectPath(ctx, bayX, bayY, bayW, bayH, bayR);
+        const bayGrad = ctx.createLinearGradient(bayX, bayY, bayX, bayY + bayH);
+        bayGrad.addColorStop(0, ed.bayBgTop);
+        bayGrad.addColorStop(1, ed.bayBgBottom);
+        ctx.fillStyle = bayGrad;
+        ctx.fill();
+
+        ctx.clip();
+        // Thin warm brass accent bar along very top of bay
+        ctx.fillStyle = ed.brass;
+        ctx.globalAlpha = 0.72;
+        ctx.fillRect(bayX, bayY, bayW, 5);
+        ctx.globalAlpha = 1;
+
+        // Subtle glass sheen inside bay
+        const sheen = ctx.createLinearGradient(bayX, bayY, bayX + bayW * 0.7, bayY + bayH * 0.8);
+        sheen.addColorStop(0, 'rgba(255,255,255,0.05)');
+        sheen.addColorStop(0.45, 'rgba(255,255,255,0.008)');
+        sheen.addColorStop(1, 'rgba(0,0,0,0.22)');
+        ctx.fillStyle = sheen;
+        ctx.fillRect(bayX, bayY, bayW, bayH);
+
+        // Corner calibration micro-brackets
+        ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+        ctx.lineWidth = 2;
+        const bp = 28;
+        const bl = 20;
+        ctx.beginPath();
+        ctx.moveTo(bayX + bp, bayY + bp + bl);
+        ctx.lineTo(bayX + bp, bayY + bp);
+        ctx.lineTo(bayX + bp + bl, bayY + bp);
+        ctx.moveTo(bayX + bayW - bp - bl, bayY + bp);
+        ctx.lineTo(bayX + bayW - bp, bayY + bp);
+        ctx.lineTo(bayX + bayW - bp, bayY + bp + bl);
+        ctx.moveTo(bayX + bp, bayY + bayH - bp - bl);
+        ctx.lineTo(bayX + bp, bayY + bayH - bp);
+        ctx.lineTo(bayX + bp + bl, bayY + bayH - bp);
+        ctx.moveTo(bayX + bayW - bp - bl, bayY + bayH - bp);
+        ctx.lineTo(bayX + bayW - bp, bayY + bayH - bp);
+        ctx.lineTo(bayX + bayW - bp, bayY + bayH - bp - bl);
+        ctx.stroke();
+
+        // Bay micro-engravings hugging top/bottom rims (0% collision with center clock)
+        ctx.font = '600 18px "JetBrains Mono", monospace';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = ed.bayLabel;
+        ctx.textAlign = 'left';
+        ctx.fillText('GATE CLOCK DISPLAY', bayX + 60, bayY + 38);
+
+        ctx.fillStyle = stats.done === stats.total ? ed.forest : ed.terracotta;
+        ctx.textAlign = 'right';
+        ctx.fillText(stats.done === stats.total ? '● BOARDED' : '● ON SCHEDULE', bayX + bayW - 60, bayY + 38);
+
+        ctx.fillStyle = ed.bayLabel;
+        ctx.textAlign = 'left';
+        ctx.fillText('OS CLOCK SAFE-ZONE', bayX + 60, bayY + bayH - 34);
+        ctx.textAlign = 'right';
+        ctx.fillText(`TARGET ${formatShortDate(state.targetDate)}`, bayX + bayW - 60, bayY + bayH - 34);
+
+        // Optional simulated iOS Lock Screen clock (ONLY rendered on 3:2 Showcase Cover!)
+        if (opts.simulateClock) {
+          const sf = '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Space Grotesk", sans-serif';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.90)';
+          ctx.font = `500 36px ${sf}`;
+          ctx.textAlign = 'center';
+          ctx.fillText(opts.simDate || 'Friday, Nov 20', bayX + bayW / 2, bayY + bayH * 0.34);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = `700 178px ${sf}`;
+          ctx.fillText(opts.simTime || '09:41', bayX + bayW / 2, bayY + bayH * 0.62);
+        }
+        ctx.restore();
+
+        // Crisp border around clock bay
+        ctx.save();
+        roundRectPath(ctx, bayX, bayY, bayW, bayH, bayR);
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = ed.isDark ? 'rgba(212,175,106,0.45)' : 'rgba(24,34,48,0.22)';
+        ctx.stroke();
+        ctx.restore();
+
+        // 3. TOP PERFORATED TEAR-LINE WITH SEMICIRCULAR TICKET NOTCHES
+        drawPerforatedTearLine(ctx, 846, W, 28, ed.tearLine, ed.notchBg);
+
+        // 4. ROUTE HEADER: NOW ---> [EMBLEM] ---> JOB
+        const padX = 66;
+        const innerW = W - padX * 2;
+        const routeY = 934;
+
+        drawFittedText(ctx, originCode, padX, routeY, 340, '"Playfair Display", Georgia, serif', '800', 102, ed.inkPrimary, 'left');
+        drawFittedText(ctx, destCode, W - padX, routeY, 340, '"Playfair Display", Georgia, serif', '800', 102, ed.terracotta, 'right');
+
+        // Dotted route track + centered emblem
+        const trackL = padX + 295;
+        const trackR = W - padX - 295;
+        ctx.save();
+        ctx.strokeStyle = ed.terracotta;
+        ctx.globalAlpha = 0.55;
+        ctx.lineWidth = 4;
+        ctx.setLineDash([7, 10]);
+        ctx.beginPath();
+        ctx.moveTo(trackL, routeY);
+        ctx.lineTo(W / 2 - 44, routeY);
+        ctx.moveTo(W / 2 + 44, routeY);
+        ctx.lineTo(trackR, routeY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1;
+        // Start & end route dots
+        ctx.fillStyle = ed.inkPrimary;
+        ctx.beginPath();
+        ctx.arc(trackL, routeY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = ed.terracotta;
+        ctx.beginPath();
+        ctx.arc(trackR, routeY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        drawTransportEmblem(ctx, state.transport, W / 2, routeY, 54, ed.terracotta);
+
+        // Sub-captions under NOW and JOB
+        drawFittedText(ctx, 'DEPARTURE · TODAY', padX + 2, routeY + 66, 360, '"JetBrains Mono", monospace', '600', 21, ed.inkMuted, 'left');
+        drawFittedText(ctx, `TARGET · ${formatShortDate(state.targetDate)}`, W - padX - 2, routeY + 66, 360, '"JetBrains Mono", monospace', '600', 21, ed.inkMuted, 'right');
+
+        // 5. FULL-WIDTH NAVY ROUTE BANNER STRIP (y: 1036, h: 72)
+        const bannerY = 1034;
+        const bannerH = 72;
+        ctx.save();
+        roundRectPath(ctx, padX, bannerY, innerW, bannerH, 16);
+        ctx.fillStyle = ed.navy;
+        ctx.fill();
+        drawFittedText(
+          ctx,
+          (state.subtitle || 'TECH ROLE & PORTFOLIO SPRINT').toUpperCase(),
+          padX + 28,
+          bannerY + bannerH / 2 + 1,
+          innerW - 310,
+          '"JetBrains Mono", monospace',
+          '700',
+          24,
+          '#F4EFE3',
+          'left'
+        );
+
+        // Right terracotta countdown pill inside banner
+        const cdPillW = 228;
+        const cdPillH = 48;
+        const cdPillX = padX + innerW - cdPillW - 14;
+        const cdPillY = bannerY + (bannerH - cdPillH) / 2;
+        roundRectPath(ctx, cdPillX, cdPillY, cdPillW, cdPillH, 10);
+        ctx.fillStyle = ed.terracotta;
+        ctx.fill();
+        drawFittedText(ctx, cd.full, cdPillX + cdPillW / 2, cdPillY + cdPillH / 2 + 1, cdPillW - 20, '"JetBrains Mono", monospace', '700', 24, '#FFFFFF', 'center');
+        ctx.restore();
+
+        // 6. 5 CHRONOLOGICAL MILESTONE GATE CARDS (y: 1134 to 2214)
+        const cardStartY = 1134;
+        const cardH = 198;
+        const cardGap = 22;
+
+        state.milestones.forEach((m, idx) => {
+          const cy = cardStartY + idx * (cardH + cardGap);
+          const isDone = m.done;
+          const isNext = idx === activeIdx;
+          const tCode = formatTCode(m.date);
+          const dateLabel = formatShortDate(m.date);
+
+          ctx.save();
+          roundRectPath(ctx, padX, cy, innerW, cardH, 24);
+          ctx.fillStyle = ed.cardBg;
+          ctx.fill();
+          ctx.lineWidth = isNext ? 4.5 : 2;
+          ctx.strokeStyle = isNext ? ed.terracotta : ed.cardBorder;
+          ctx.stroke();
+
+          // Left accent bar on active NEXT GATE
+          if (isNext) {
+            ctx.save();
+            ctx.clip();
+            ctx.fillStyle = ed.terracotta;
+            ctx.fillRect(padX, cy, 12, cardH);
+            ctx.restore();
+          }
+          ctx.restore();
+
+          // Left Gate Code Column
+          const leftColX = padX + 34;
+          const pillW = 148;
+          const pillH = 54;
+          const pillY = cy + 62;
+
+          // Tiny Gate number pill/label above badge
+          drawFittedText(
+            ctx,
+            `GATE 0${idx + 1}`,
+            leftColX + pillW / 2,
+            cy + 36,
+            pillW,
+            '"JetBrains Mono", monospace',
+            '700',
+            19,
+            isDone ? ed.forest : isNext ? ed.terracotta : ed.inkMuted,
+            'center'
+          );
+
+          // T-XX Colored Pill
+          ctx.save();
+          roundRectPath(ctx, leftColX, pillY, pillW, pillH, 12);
+          ctx.fillStyle = isDone ? ed.forest : isNext ? ed.terracotta : ed.navy;
+          ctx.fill();
+          drawFittedText(ctx, tCode, leftColX + pillW / 2, pillY + pillH / 2 + 1, pillW - 16, '"JetBrains Mono", monospace', '700', 28, '#FFFFFF', 'center');
+          ctx.restore();
+
+          // Short date below T-XX badge
+          drawFittedText(
+            ctx,
+            dateLabel,
+            leftColX + pillW / 2,
+            cy + 148,
+            pillW,
+            '"JetBrains Mono", monospace',
+            '600',
+            22,
+            ed.inkSecondary,
+            'center'
+          );
+
+          // Center Title & Note Column
+          const midX = leftColX + pillW + 30;
+          const rightBoxW = 248;
+          const midMaxW = innerW - (midX - padX) - rightBoxW - 44;
+
+          drawFittedText(
+            ctx,
+            m.title || `Milestone 0${idx + 1}`,
+            midX,
+            cy + 78,
+            midMaxW,
+            '"Space Grotesk", sans-serif',
+            '700',
+            37,
+            isDone ? ed.inkSecondary : ed.inkPrimary,
+            'left'
+          );
+
+          drawFittedText(
+            ctx,
+            m.note || 'Action checkpoint toward target date',
+            midX,
+            cy + 130,
+            midMaxW,
+            '"Space Grotesk", sans-serif',
+            '500',
+            26,
+            ed.inkMuted,
+            'left'
+          );
+
+          // Right Status Stub / Rubber Stamp Column
+          const rightBoxX = padX + innerW - rightBoxW - 26;
+          const rightBoxY = cy + 36;
+          const rightBoxH = cardH - 72;
+
+          if (isDone) {
+            drawClearedRubberStamp(
+              ctx,
+              rightBoxX + rightBoxW / 2,
+              cy + cardH / 2,
+              218,
+              84,
+              ed.forest
+            );
+          } else if (isNext) {
+            ctx.save();
+            roundRectPath(ctx, rightBoxX, rightBoxY, rightBoxW, rightBoxH, 16);
+            ctx.fillStyle = ed.isDark ? 'rgba(217,90,63,0.14)' : 'rgba(200,75,49,0.08)';
+            ctx.fill();
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = ed.terracotta;
+            ctx.stroke();
+
+            drawFittedText(ctx, 'NEXT GATE', rightBoxX + rightBoxW / 2, cy + 84, rightBoxW - 20, '"JetBrains Mono", monospace', '700', 26, ed.terracotta, 'center');
+            drawFittedText(ctx, 'NOW BOARDING', rightBoxX + rightBoxW / 2, cy + 124, rightBoxW - 20, '"JetBrains Mono", monospace', '600', 18, ed.inkSecondary, 'center');
+            ctx.restore();
+          } else {
+            ctx.save();
+            roundRectPath(ctx, rightBoxX, rightBoxY, rightBoxW, rightBoxH, 16);
+            ctx.setLineDash([7, 7]);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = ed.cardBorder;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            drawFittedText(ctx, 'SCHEDULED', rightBoxX + rightBoxW / 2, cy + 84, rightBoxW - 20, '"JetBrains Mono", monospace', '700', 22, ed.inkMuted, 'center');
+            drawFittedText(ctx, `GATE 0${idx + 1}`, rightBoxX + rightBoxW / 2, cy + 122, rightBoxW - 20, '"JetBrains Mono", monospace', '600', 19, ed.inkSecondary, 'center');
+            ctx.restore();
+          }
+        });
+
+        // 7. BOTTOM PERFORATED TEAR-LINE WITH SEMICIRCULAR NOTCHES (y: 2258)
+        drawPerforatedTearLine(ctx, 2258, W, 28, ed.tearLine, ed.notchBg);
+
+        // 8. BOTTOM SAFE-ZONE FOOTER: BOARDING PROGRESS + CENTERED BARCODE
+        // Centered barcode (w=490 -> x=400..890) leaves 400px clearance left & right for iOS Flashlight & Camera!
+        drawFittedText(
+          ctx,
+          `BOARDING PROGRESS  ${stats.pct}%  (${stats.done}/${stats.total} GATES)`,
+          W / 2,
+          2324,
+          innerW - 80,
+          '"JetBrains Mono", monospace',
+          '700',
+          22,
+          ed.inkSecondary,
+          'center'
+        );
+
+        drawBoardingProgressBar(ctx, 255, 2362, W - 510, 26, stats.pct, ed);
+
+        drawFittedText(
+          ctx,
+          `EXPRESS PASS  //  ${originCode} → ${destCode}  //  ${ed.name.toUpperCase()}`,
+          W / 2,
+          2424,
+          W - 380,
+          '"JetBrains Mono", monospace',
+          '600',
+          18,
+          ed.inkMuted,
+          'center'
+        );
+
+        // Crisp centered vector boarding barcode cleanly between bottom-left Flashlight & bottom-right Camera
+        const bcW = 486;
+        const bcH = 148;
+        const bcX = Math.round((W - bcW) / 2);
+        const bcY = 2466;
+        drawVectorBarcode(ctx, bcX, bcY, bcW, bcH, ed.inkPrimary);
+
+        drawFittedText(
+          ctx,
+          `FB-2026-${originCode}${destCode}  •  DESIGNED WITH GOOGLE GEMINI`,
+          W / 2,
+          2646,
+          W - 440,
+          '"JetBrains Mono", monospace',
+          '500',
+          18,
+          ed.inkMuted,
+          'center'
+        );
+      }
+
+      /* -----------------------------------------------------------------------
+       * 6. DESKTOP WALLPAPER RENDERER (2560 x 1440 NATIVE PURE ARTWORK)
+       * ----------------------------------------------------------------------- */
+      function renderDesktopCanvas(canvas) {
+        const W = 2560;
+        const H = 1440;
+        if (canvas.width !== W || canvas.height !== H) {
+          canvas.width = W;
+          canvas.height = H;
+        }
+        const ctx = canvas.getContext('2d');
+        const ed = EDITIONS[state.editionId];
+        const cd = getCountdownSummary(state.targetDate);
+        const stats = getProgressStats();
+        const activeIdx = getActiveGateIndex();
+        const originCode = (state.origin || 'NOW').toUpperCase();
+        const destCode = (state.dest || 'JOB').toUpperCase();
+
+        // Background
+        const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+        bgGrad.addColorStop(0, ed.paperBg);
+        bgGrad.addColorStop(1, ed.paperShade);
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, W, H);
+        applyPaperGrain(ctx, W, H, ed.grainAlpha);
+
+        // Fine perimeter border
+        ctx.save();
+        roundRectPath(ctx, 36, 36, W - 72, H - 72, 28);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = ed.cardBorder;
+        ctx.stroke();
+        ctx.restore();
+
+        // Top corner engraved metadata
+        drawFittedText(ctx, `FINAL BOARDING // ${ed.name.toUpperCase()}`, 84, 82, 520, '"JetBrains Mono", monospace', '700', 20, ed.inkMuted, 'left');
+        drawFittedText(ctx, `ROUTE ${originCode} → ${destCode}`, W - 84, 82, 420, '"JetBrains Mono", monospace', '700', 20, ed.terracotta, 'right');
+
+        // 1. TOP-CENTER RECESSED DARK GATE CLOCK DISPLAY BAY (y: 66..428 -> ~29.7% height)
+        const bayW = 1040;
+        const bayH = 362;
+        const bayX = (W - bayW) / 2;
+        const bayY = 66;
+
+        ctx.save();
+        roundRectPath(ctx, bayX, bayY, bayW, bayH, 30);
+        const bayGrad = ctx.createLinearGradient(bayX, bayY, bayX, bayY + bayH);
+        bayGrad.addColorStop(0, ed.bayBgTop);
+        bayGrad.addColorStop(1, ed.bayBgBottom);
+        ctx.fillStyle = bayGrad;
+        ctx.fill();
+        ctx.clip();
+
+        ctx.fillStyle = ed.brass;
+        ctx.globalAlpha = 0.72;
+        ctx.fillRect(bayX, bayY, bayW, 5);
+        ctx.globalAlpha = 1;
+
+        ctx.font = '600 17px "JetBrains Mono", monospace';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = ed.bayLabel;
+        ctx.textAlign = 'left';
+        ctx.fillText('GATE CLOCK DISPLAY', bayX + 46, bayY + 34);
+        ctx.fillStyle = stats.done === stats.total ? ed.forest : ed.terracotta;
+        ctx.textAlign = 'right';
+        ctx.fillText(stats.done === stats.total ? '● BOARDED' : '● ON SCHEDULE', bayX + bayW - 46, bayY + 34);
+
+        ctx.fillStyle = ed.bayLabel;
+        ctx.textAlign = 'left';
+        ctx.fillText('WORKSTATION CLOCK SAFE-ZONE', bayX + 46, bayY + bayH - 30);
+        ctx.textAlign = 'right';
+        ctx.fillText(`TARGET ${formatShortDate(state.targetDate)}`, bayX + bayW - 46, bayY + bayH - 30);
+        ctx.restore();
+
+        ctx.save();
+        roundRectPath(ctx, bayX, bayY, bayW, bayH, 30);
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = ed.isDark ? 'rgba(212,175,106,0.45)' : 'rgba(24,34,48,0.22)';
+        ctx.stroke();
+        ctx.restore();
+
+        // 2. MAIN TWO-COLUMN BOARDING PASS DECK (y: 478..1224 -> leaves bottom 15% clean!)
+        const deckX = 110;
+        const deckY = 478;
+        const deckW = W - 220;
+        const deckH = 746;
+        const leftW = 860;
+        const gap = 36;
+        const rightX = deckX + leftW + gap;
+        const rightW = deckW - leftW - gap;
+
+        // Left Ticket Stub Card
+        ctx.save();
+        roundRectPath(ctx, deckX, deckY, leftW, deckH, 28);
+        ctx.fillStyle = ed.cardBg;
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = ed.cardBorder;
+        ctx.stroke();
+        ctx.restore();
+
+        // Navy Header Band inside Left Stub
+        ctx.save();
+        roundRectPath(ctx, deckX, deckY, leftW, 74, 28);
+        ctx.clip();
+        ctx.fillStyle = ed.navy;
+        ctx.fillRect(deckX, deckY, leftW, 74);
+        ctx.fillStyle = ed.brass;
+        ctx.fillRect(deckX, deckY + 70, leftW, 4);
+        drawFittedText(ctx, 'VINTAGE EXPRESS BOARDING PASS', deckX + 36, deckY + 37, leftW - 72, '"JetBrains Mono", monospace', '700', 22, '#F4EFE3', 'left');
+        ctx.restore();
+
+        // Route Codes inside Left Stub
+        const stubRouteY = deckY + 168;
+        drawFittedText(ctx, originCode, deckX + 42, stubRouteY, 260, '"Playfair Display", Georgia, serif', '800', 84, ed.inkPrimary, 'left');
+        drawFittedText(ctx, destCode, deckX + leftW - 42, stubRouteY, 260, '"Playfair Display", Georgia, serif', '800', 84, ed.terracotta, 'right');
+        drawTransportEmblem(ctx, state.transport, deckX + leftW / 2, stubRouteY, 48, ed.terracotta);
+
+        // Countdown Terracotta Badge
+        const badgeX = deckX + 42;
+        const badgeY = deckY + 252;
+        const badgeW = leftW - 84;
+        const badgeH = 118;
+        ctx.save();
+        roundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 20);
+        ctx.fillStyle = ed.terracotta;
+        ctx.fill();
+        drawFittedText(ctx, cd.code, badgeX + 42, badgeY + badgeH / 2 + 2, 290, '"Space Grotesk", sans-serif', '700', 76, '#FFFFFF', 'left');
+        drawFittedText(ctx, `TARGET ${formatShortDate(state.targetDate)}`, badgeX + badgeW - 38, badgeY + 42, 420, '"JetBrains Mono", monospace', '700', 25, '#FFE8DF', 'right');
+        drawFittedText(ctx, (state.subtitle || '').toUpperCase(), badgeX + badgeW - 38, badgeY + 80, 440, '"JetBrains Mono", monospace', '600', 20, '#FFFFFF', 'right');
+        ctx.restore();
+
+        // Progress Bar inside Left Stub
+        drawFittedText(ctx, `BOARDING PROGRESS  ${stats.pct}% (${stats.done}/${stats.total} GATES)`, deckX + 42, deckY + 420, leftW - 84, '"JetBrains Mono", monospace', '700', 21, ed.inkSecondary, 'left');
+        drawBoardingProgressBar(ctx, deckX + 42, deckY + 448, leftW - 84, 28, stats.pct, ed);
+
+        // Dashed divider inside Left Stub
+        ctx.save();
+        ctx.strokeStyle = ed.tearLine;
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([10, 8]);
+        ctx.beginPath();
+        ctx.moveTo(deckX + 36, deckY + 518);
+        ctx.lineTo(deckX + leftW - 36, deckY + 518);
+        ctx.stroke();
+        ctx.restore();
+
+        // Barcode at bottom of Left Stub
+        drawVectorBarcode(ctx, deckX + 86, deckY + 554, leftW - 172, 118, ed.inkPrimary);
+        drawFittedText(ctx, 'HANDSHAKE AI SKILLS STUDIO × GOOGLE GEMINI', deckX + leftW / 2, deckY + 706, leftW - 84, '"JetBrains Mono", monospace', '600', 18, ed.inkMuted, 'center');
+
+        // Right 5-Gate Itinerary Manifest
+        ctx.save();
+        roundRectPath(ctx, rightX, deckY, rightW, deckH, 28);
+        ctx.fillStyle = ed.cardBg;
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = ed.cardBorder;
+        ctx.stroke();
+        ctx.restore();
+
+        drawFittedText(ctx, 'BOARDING SEQUENCE // 5 CHRONOLOGICAL GATES', rightX + 36, deckY + 42, rightW - 280, '"JetBrains Mono", monospace', '700', 21, ed.inkMuted, 'left');
+        drawFittedText(ctx, activeIdx === -1 ? 'ALL GATES CLEARED' : `NEXT: GATE 0${activeIdx + 1}`, rightX + rightW - 36, deckY + 42, 260, '"JetBrains Mono", monospace', '700', 21, ed.terracotta, 'right');
+
+        const rowStartY = deckY + 78;
+        const rowH = 114;
+        const rowGap = 16;
+        const rowPadX = 32;
+        const rowW = rightW - rowPadX * 2;
+
+        state.milestones.forEach((m, idx) => {
+          const ry = rowStartY + idx * (rowH + rowGap);
+          const isDone = m.done;
+          const isNext = idx === activeIdx;
+
+          ctx.save();
+          roundRectPath(ctx, rightX + rowPadX, ry, rowW, rowH, 18);
+          ctx.fillStyle = ed.paperBg;
+          ctx.fill();
+          ctx.lineWidth = isNext ? 3.5 : 1.8;
+          ctx.strokeStyle = isNext ? ed.terracotta : ed.cardBorder;
+          ctx.stroke();
+          ctx.restore();
+
+          // T-XX Badge
+          const bx = rightX + rowPadX + 24;
+          const by = ry + 30;
+          const bw = 132;
+          const bh = 54;
+          ctx.save();
+          roundRectPath(ctx, bx, by, bw, bh, 12);
+          ctx.fillStyle = isDone ? ed.forest : isNext ? ed.terracotta : ed.navy;
+          ctx.fill();
+          drawFittedText(ctx, formatTCode(m.date), bx + bw / 2, by + bh / 2 + 1, bw - 16, '"JetBrains Mono", monospace', '700', 25, '#FFFFFF', 'center');
+          ctx.restore();
+
+          // Date + Title + Note
+          const tx = bx + bw + 28;
+          const stampW = 216;
+          const tMaxW = rowW - (tx - (rightX + rowPadX)) - stampW - 32;
+          drawFittedText(
+            ctx,
+            `${formatShortDate(m.date)}  •  ${m.title}`,
+            tx,
+            ry + 42,
+            tMaxW,
+            '"Space Grotesk", sans-serif',
+            '700',
+            30,
+            isDone ? ed.inkSecondary : ed.inkPrimary,
+            'left'
+          );
+          drawFittedText(ctx, m.note, tx, ry + 80, tMaxW, '"Space Grotesk", sans-serif', '500', 22, ed.inkMuted, 'left');
+
+          // Right Status / Rubber Stamp
+          const sx = rightX + rowPadX + rowW - stampW - 18;
+          if (isDone) {
+            drawClearedRubberStamp(ctx, sx + stampW / 2, ry + rowH / 2, 186, 66, ed.forest);
+          } else if (isNext) {
+            drawFittedText(ctx, 'NEXT GATE', sx + stampW / 2, ry + rowH / 2, stampW - 12, '"JetBrains Mono", monospace', '700', 24, ed.terracotta, 'center');
+          } else {
+            drawFittedText(ctx, `GATE 0${idx + 1}`, sx + stampW / 2, ry + rowH / 2, stampW - 12, '"JetBrains Mono", monospace', '700', 22, ed.inkMuted, 'center');
+          }
+        });
+
+        // Subtle Bottom Corner Footers (Center 100% Clear for Desktop Login Avatar!)
+        drawFittedText(ctx, 'READY TO SET AS LOCK SCREEN TODAY', 110, H - 82, 620, '"JetBrains Mono", monospace', '600', 18, ed.inkMuted, 'left');
+        drawFittedText(ctx, '2560 × 1440 NATIVE DESKTOP EDITION', W - 110, H - 82, 620, '"JetBrains Mono", monospace', '600', 18, ed.inkMuted, 'right');
+      }
+
+      /* -----------------------------------------------------------------------
+       * 7. 3:2 HANDSHAKE SHOWCASE COVER RENDERER (1800 x 1200)
+       *    WITH PHOTOREALISTIC IPHONE 16 PRO & BADGE-SAFE TOP-LEFT CORNER
+       * ----------------------------------------------------------------------- */
+      function renderCoverCanvas(canvas) {
+        const W = 1800;
+        const H = 1200;
+        if (canvas.width !== W || canvas.height !== H) {
+          canvas.width = W;
+          canvas.height = H;
+        }
+        const ctx = canvas.getContext('2d');
+        const ed = EDITIONS[state.editionId];
+        const cd = getCountdownSummary(state.targetDate);
+        const activeIdx = getActiveGateIndex();
+        const originCode = (state.origin || 'NOW').toUpperCase();
+        const destCode = (state.dest || 'JOB').toUpperCase();
+
+        // 1. Dark Charcoal Architectural Blueprint Grid Backdrop (#121312)
+        ctx.fillStyle = '#121312';
+        ctx.fillRect(0, 0, W, H);
+
+        // Fine architectural blueprint grid lines
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.032)';
+        ctx.lineWidth = 1;
+        const step = 40;
+        for (let x = 0; x <= W; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, H);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= H; y += step) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(W, y);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        // Soft ambient studio vignette + warm spotlight behind phone and card
+        const spot = ctx.createRadialGradient(340, 650, 50, 340, 650, 540);
+        spot.addColorStop(0, 'rgba(200, 75, 49, 0.11)');
+        spot.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = spot;
+        ctx.fillRect(0, 0, W, H);
+
+        const vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.34, W * 0.5, H * 0.5, W * 0.72);
+        vig.addColorStop(0, 'rgba(0,0,0,0)');
+        vig.addColorStop(1, 'rgba(0,0,0,0.48)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(0, 0, W, H);
+
+        // Subtle outer architectural hairline border
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(28, 28, W - 56, H - 56);
+        ctx.restore();
+
+        // 2. PHOTOREALISTIC IPHONE 16 PRO ON LEFT SIDE (x=120, y=216, 428x896)
+        //    Keeps entire top-left 460x180 px corner 100% clear for Handshake badge!
+        const now = new Date();
+        const simDate = `${WEEKDAYS[now.getDay()]}, ${MONTHS_TITLE[now.getMonth()]} ${now.getDate()}`;
+        const simTime = '09:41';
+        const simStatusTime = '9:41';
+
+        const offPhone = document.createElement('canvas');
+        renderPhoneCanvas(offPhone, {
+          simulateClock: true,
+          simDate,
+          simTime,
+        });
+
+        const phoneX = 120;
+        const phoneY = 216;
+        const phoneW = 428;
+        const phoneH = 896;
+        const tiThick = 4.5;
+        const bezelThick = 9;
+        const totalInset = tiThick + bezelThick; // 13.5
+        const outerR = 64;
+        const bezelR = 59.5;
+        const screenR = 50.5;
+
+        const bezelX = phoneX + tiThick;
+        const bezelY = phoneY + tiThick;
+        const bezelW = phoneW - tiThick * 2; // 419
+        const bezelH = phoneH - tiThick * 2; // 887
+
+        const sx = phoneX + totalInset;      // 133.5
+        const sy = phoneY + totalInset;      // 229.5
+        const scrW = phoneW - totalInset * 2; // 401
+        const scrH = phoneH - totalInset * 2; // 869 (exact 19.5:9 ratio!)
+
+        // Helper: Metallic protruding side buttons (2.5px protrusion)
+        function drawTitaniumButton(bx, by, bw, bh, isLeft) {
+          ctx.save();
+          ctx.beginPath();
+          const r = 1.8;
+          if (isLeft) {
+            ctx.moveTo(bx + bw, by);
+            ctx.lineTo(bx + r, by);
+            ctx.quadraticCurveTo(bx, by, bx, by + r);
+            ctx.lineTo(bx, by + bh - r);
+            ctx.quadraticCurveTo(bx, by + bh, bx + r, by + bh);
+            ctx.lineTo(bx + bw, by + bh);
+          } else {
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx + bw - r, by);
+            ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + r);
+            ctx.lineTo(bx + bw, by + bh - r);
+            ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - r, by + bh);
+            ctx.lineTo(bx, by + bh);
+          }
+          ctx.closePath();
+
+          const g = ctx.createLinearGradient(bx, by, bx, by + bh);
+          g.addColorStop(0, '#A59E94');
+          g.addColorStop(0.22, '#57544F');
+          g.addColorStop(0.55, '#8B857B');
+          g.addColorStop(0.85, '#3E3C39');
+          g.addColorStop(1, '#292826');
+          ctx.fillStyle = g;
+          ctx.fill();
+          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = 'rgba(255, 250, 240, 0.32)';
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Physical Side Hardware Buttons (Action + Vol Up + Vol Down on Left; Side/Power on Right)
+        drawTitaniumButton(phoneX - 2.5, phoneY + 162, 3, 30, true);
+        drawTitaniumButton(phoneX - 2.5, phoneY + 216, 3, 60, true);
+        drawTitaniumButton(phoneX - 2.5, phoneY + 292, 3, 60, true);
+        drawTitaniumButton(phoneX + phoneW - 0.5, phoneY + 240, 3, 94, false);
+
+        // Multi-Layered Soft Studio Drop Shadow beneath iPhone 16 Pro
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.72)';
+        ctx.shadowBlur = 76;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 36;
+        roundRectPath(ctx, phoneX, phoneY, phoneW, phoneH, outerR);
+        ctx.fillStyle = '#141416';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.88)';
+        ctx.shadowBlur = 24;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 12;
+        roundRectPath(ctx, phoneX, phoneY, phoneW, phoneH, outerR);
+
+        // Brushed Natural/Dark Titanium Metallic Multi-Stop Sheen Gradient
+        const tiGrad = ctx.createLinearGradient(phoneX, phoneY, phoneX + phoneW, phoneY + phoneH);
+        tiGrad.addColorStop(0, '#8C867D');
+        tiGrad.addColorStop(0.15, '#4E4B47');
+        tiGrad.addColorStop(0.32, '#A6A096');
+        tiGrad.addColorStop(0.55, '#3A3835');
+        tiGrad.addColorStop(0.76, '#7C766D');
+        tiGrad.addColorStop(0.92, '#33322F');
+        tiGrad.addColorStop(1, '#615D57');
+        ctx.fillStyle = tiGrad;
+        ctx.fill();
+        ctx.restore();
+
+        // Subtle Thin Dark Matte Antenna Bands near corners of Titanium Frame
+        ctx.save();
+        roundRectPath(ctx, phoneX, phoneY, phoneW, phoneH, outerR);
+        ctx.clip();
+        ctx.fillStyle = '#232220';
+        ctx.fillRect(phoneX, phoneY + 80, tiThick + 1, 6);
+        ctx.fillRect(phoneX + phoneW - tiThick - 1, phoneY + 80, tiThick + 1, 6);
+        ctx.fillRect(phoneX, phoneY + phoneH - 86, tiThick + 1, 6);
+        ctx.fillRect(phoneX + phoneW - tiThick - 1, phoneY + phoneH - 86, tiThick + 1, 6);
+        ctx.fillRect(phoneX + phoneW - 88, phoneY, 6, tiThick + 1);
+        ctx.fillRect(phoneX + 82, phoneY + phoneH - tiThick - 1, 6, tiThick + 1);
+        ctx.restore();
+
+        // Subtle Metallic Outer Specular Highlight Rim
+        ctx.save();
+        roundRectPath(ctx, phoneX + 0.6, phoneY + 0.6, phoneW - 1.2, phoneH - 1.2, outerR - 0.5);
+        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = 'rgba(255, 252, 245, 0.36)';
+        ctx.stroke();
+        ctx.restore();
+
+        // Ultra-Thin Uniform Jet-Black OLED Bezel (9px)
+        ctx.save();
+        roundRectPath(ctx, bezelX, bezelY, bezelW, bezelH, bezelR);
+        ctx.fillStyle = '#030304';
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.stroke();
+        ctx.restore();
+
+        // Clipped Inner OLED Display (401 x 869, Concentric 50.5px Radius)
+        ctx.save();
+        roundRectPath(ctx, sx, sy, scrW, scrH, screenR);
+        ctx.clip();
+        ctx.drawImage(offPhone, sx, sy, scrW, scrH);
+
+        // Authentic Centered Dynamic Island Pill + Dark-Sapphire Front Camera Lens
+        const diW = 108;
+        const diH = 30;
+        const diX = sx + (scrW - diW) / 2;
+        const diY = sy + 13;
+        const statusY = diY + diH / 2;
+
+        ctx.save();
+        roundRectPath(ctx, diX, diY, diW, diH, diH / 2);
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.stroke();
+
+        // Dark-sapphire TrueDepth lens on right inner end of Dynamic Island
+        const camX = diX + diW - 18.5;
+        ctx.beginPath();
+        ctx.arc(camX, statusY, 6.8, 0, Math.PI * 2);
+        ctx.fillStyle = '#0A0D15';
+        ctx.fill();
+        ctx.lineWidth = 0.8;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.stroke();
+
+        const lensG = ctx.createRadialGradient(camX - 1.5, statusY - 1.5, 0.5, camX, statusY, 4.6);
+        lensG.addColorStop(0, '#2C59A8');
+        lensG.addColorStop(0.48, '#0F2248');
+        lensG.addColorStop(1, '#040710');
+        ctx.beginPath();
+        ctx.arc(camX, statusY, 4.3, 0, Math.PI * 2);
+        ctx.fillStyle = lensG;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(camX - 1.5, statusY - 1.5, 1.25, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(190, 228, 255, 0.78)';
+        ctx.fill();
+        ctx.restore();
+
+        // Authentic iOS Status Bar (Flanking Dynamic Island, Vertically Centered)
+        const sfFont = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Space Grotesk", sans-serif';
+        const statusInk = ed.statusBarInk;
+
+        // Left Ear: Bold SF-Style "9:41"
+        const leftEarCX = sx + (diX - sx) / 2 + 4;
+        ctx.save();
+        ctx.fillStyle = statusInk;
+        ctx.font = `600 15.5px ${sfFont}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(simStatusTime, leftEarCX, statusY + 1);
+        ctx.restore();
+
+        // Right Ear: 4-Bar Ascending Cellular + 3-Arc Wi-Fi + Rounded Battery with Nub
+        const rightEarCX = diX + diW + (sx + scrW - (diX + diW)) / 2 - 4;
+        let ix = rightEarCX - 34;
+
+        ctx.save();
+        ctx.fillStyle = statusInk;
+        ctx.strokeStyle = statusInk;
+
+        const bars = [4.5, 6.8, 9.2, 11.4];
+        const barBottom = statusY + 5.7;
+        bars.forEach((bh, i) => {
+          roundRectPath(ctx, ix + i * 4.3, barBottom - bh, 2.8, bh, 1);
+          ctx.fill();
+        });
+        ix += 21.5;
+
+        // Crisp 3-Arc Wi-Fi Symbol
+        const wCX = ix + 7;
+        const wDotY = statusY + 4.3;
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.arc(wCX, wDotY, 8.8, -Math.PI * 0.76, -Math.PI * 0.24);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(wCX, wDotY, 5.4, -Math.PI * 0.75, -Math.PI * 0.25);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(wCX, wDotY, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        ix += 19;
+
+        // Rounded iOS Battery Outline + Fill + Right Terminal Nub
+        const bW = 23;
+        const bH = 11.4;
+        const bY = statusY - bH / 2;
+        ctx.globalAlpha = 0.58;
+        ctx.lineWidth = 1.25;
+        roundRectPath(ctx, ix, bY, bW, bH, 3.4);
+        ctx.stroke();
+
+        ctx.globalAlpha = 1;
+        roundRectPath(ctx, ix + 2, bY + 2, 16.5, bH - 4, 1.6);
+        ctx.fill();
+
+        ctx.globalAlpha = 0.68;
+        ctx.beginPath();
+        ctx.arc(ix + bW + 1.1, statusY, 2, -Math.PI / 2, Math.PI / 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Bottom Frosted-Glass Flashlight (Left) & Camera (Right) Quick-Action Buttons
+        const ctrlY = sy + scrH - 62;
+        const btnR = 22;
+        const flashX = sx + 54;
+        const camBtnX = sx + scrW - 54;
+
+        function drawGlassQuickCircle(cx, cy) {
+          ctx.save();
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.36)';
+          ctx.shadowBlur = 12;
+          ctx.shadowOffsetY = 4;
+          ctx.beginPath();
+          ctx.arc(cx, cy, btnR, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(16, 22, 30, 0.56)';
+          ctx.fill();
+          ctx.restore();
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(cx, cy, btnR, 0, Math.PI * 2);
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.26)';
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Crisp White Vector Flashlight Icon
+        drawGlassQuickCircle(flashX, ctrlY);
+        ctx.save();
+        ctx.translate(flashX, ctrlY);
+        ctx.fillStyle = '#FFFFFF';
+        roundRectPath(ctx, -4.3, -9.6, 8.6, 2.2, 0.7);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-4.1, -6.8);
+        ctx.lineTo(4.1, -6.8);
+        ctx.lineTo(2.2, -3.2);
+        ctx.lineTo(2.2, 8.8);
+        ctx.quadraticCurveTo(2.2, 10, 0.9, 10);
+        ctx.lineTo(-0.9, 10);
+        ctx.quadraticCurveTo(-2.2, 10, -2.2, 8.8);
+        ctx.lineTo(-2.2, -3.2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = 'rgba(16, 22, 30, 0.8)';
+        roundRectPath(ctx, -0.8, -1.1, 1.6, 3.5, 0.8);
+        ctx.fill();
+        ctx.restore();
+
+        // Crisp White Vector Camera Icon
+        drawGlassQuickCircle(camBtnX, ctrlY);
+        ctx.save();
+        ctx.translate(camBtnX, ctrlY);
+        ctx.fillStyle = '#FFFFFF';
+        roundRectPath(ctx, -10.2, -4.8, 20.4, 13.6, 3.2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-4.8, -4.8);
+        ctx.lineTo(-3.4, -7.8);
+        ctx.quadraticCurveTo(-2.9, -8.3, -2, -8.3);
+        ctx.lineTo(2, -8.3);
+        ctx.quadraticCurveTo(2.9, -8.3, 3.4, -7.8);
+        ctx.lineTo(4.8, -4.8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(0, 1.9, 4.3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 22, 30, 0.82)';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(0, 1.9, 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(6.4, -1.6, 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 22, 30, 0.8)';
+        ctx.fill();
+        ctx.restore();
+
+        // Authentic Thin Translucent White Home Indicator Pill
+        const homeW = 138;
+        const homeH = 4.6;
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+        ctx.shadowBlur = 4;
+        roundRectPath(ctx, sx + (scrW - homeW) / 2, sy + scrH - 13, homeW, homeH, homeH / 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.86)';
+        ctx.fill();
+        ctx.restore();
+
+        // Subtle Diagonal Ceramic Shield Glass Reflection Sheen over Top-Right Corner
+        const glassSheen = ctx.createLinearGradient(sx + scrW, sy, sx + scrW * 0.25, sy + scrH * 0.55);
+        glassSheen.addColorStop(0, 'rgba(255, 255, 255, 0.09)');
+        glassSheen.addColorStop(0.32, 'rgba(255, 255, 255, 0.025)');
+        glassSheen.addColorStop(0.6, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = glassSheen;
+        ctx.fillRect(sx, sy, scrW, scrH);
+
+        // Fine Inner OLED Edge Seal
+        roundRectPath(ctx, sx + 0.5, sy + 0.5, scrW - 1, scrH - 1, screenR - 0.5);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.45)';
+        ctx.stroke();
+
+        ctx.restore(); // End clipped iPhone OLED screen
+
+        // 3. RIGHT-SIDE TACTILE COLLECTOR SHOWCASE TICKET CARD (x=640, y=95, w=1060, h=1010)
+        const cardX = 640;
+        const cardY = 95;
+        const cardW = 1060;
+        const cardH = 1010;
+        const cardR = 30;
+
+        // Card drop shadow
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.72)';
+        ctx.shadowBlur = 60;
+        ctx.shadowOffsetY = 24;
+        roundRectPath(ctx, cardX, cardY, cardW, cardH, cardR);
+        ctx.fillStyle = ed.paperBg;
+        ctx.fill();
+        ctx.restore();
+
+        // Card clipped interior
+        ctx.save();
+        roundRectPath(ctx, cardX, cardY, cardW, cardH, cardR);
+        ctx.clip();
+
+        // Cotton paper gradient + subtle grain
+        const cpGrad = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
+        cpGrad.addColorStop(0, ed.paperBg);
+        cpGrad.addColorStop(1, ed.paperShade);
+        ctx.fillStyle = cpGrad;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+        applyPaperGrain(ctx, W, H, ed.grainAlpha);
+
+        // Deep Navy Top Header Bar + Thin Warm Brass Accent Rule Underneath
+        const headH = 74;
+        ctx.fillStyle = ed.navy;
+        ctx.fillRect(cardX, cardY, cardW, headH);
+        ctx.fillStyle = ed.brass;
+        ctx.fillRect(cardX, cardY + headH, cardW, 4);
+
+        drawFittedText(
+          ctx,
+          'HANDSHAKE AI SKILLS STUDIO × GOOGLE  //  GEMINI',
+          cardX + 42,
+          cardY + headH / 2 + 1,
+          cardW - 260,
+          '"JetBrains Mono", monospace',
+          '600',
+          19,
+          '#F3EDE0',
+          'left'
+        );
+        drawFittedText(
+          ctx,
+          `${originCode} → ${destCode}`,
+          cardX + cardW - 42,
+          cardY + headH / 2 + 1,
+          200,
+          '"JetBrains Mono", monospace',
+          '700',
+          20,
+          '#F3EDE0',
+          'right'
+        );
+
+        // Bold Playfair Display Title & Subtitle (Left) + Prominent Terracotta Countdown Badge (Right)
+        const cPad = 42;
+        const badgeW = 264;
+        const badgeH = 120;
+        const badgeX = cardX + cardW - cPad - badgeW;
+        const badgeY = cardY + 112;
+
+        drawFittedText(
+          ctx,
+          'FINAL BOARDING',
+          cardX + cPad,
+          cardY + 156,
+          cardW - cPad * 2 - badgeW - 28,
+          '"Playfair Display", Georgia, serif',
+          '900',
+          74,
+          ed.inkPrimary,
+          'left'
+        );
+        drawFittedText(
+          ctx,
+          'Vintage Express Countdown Lock Screen',
+          cardX + cPad + 2,
+          cardY + 216,
+          cardW - cPad * 2 - badgeW - 28,
+          '"Space Grotesk", sans-serif',
+          '500',
+          29,
+          ed.inkSecondary,
+          'left'
+        );
+
+        // Prominent Terracotta Rounded Countdown Badge ("T-30" / "TARGET DEC 20")
+        roundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 18);
+        ctx.fillStyle = ed.terracotta;
+        ctx.fill();
+        drawFittedText(ctx, cd.code, badgeX + badgeW / 2, badgeY + 46, badgeW - 24, '"Space Grotesk", sans-serif', '700', 54, '#FFFFFF', 'center');
+        drawFittedText(
+          ctx,
+          `TARGET ${formatShortDate(state.targetDate)}`,
+          badgeX + badgeW / 2,
+          badgeY + 92,
+          badgeW - 24,
+          '"JetBrains Mono", monospace',
+          '600',
+          18,
+          '#FFE7DE',
+          'center'
+        );
+
+        // Thin divider rule below hero header
+        ctx.strokeStyle = ed.cardBorder;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cardX + cPad, cardY + 258);
+        ctx.lineTo(cardX + cardW - cPad, cardY + 258);
+        ctx.stroke();
+
+        // Terracotta Monospace Route Line
+        drawFittedText(
+          ctx,
+          `ROUTE: ${originCode} → ${destCode}  //  ${(state.subtitle || 'TECH ROLE & PORTFOLIO SPRINT').toUpperCase()}`,
+          cardX + cPad,
+          cardY + 294,
+          cardW - cPad * 2,
+          '"JetBrains Mono", monospace',
+          '700',
+          20,
+          ed.terracotta,
+          'left'
+        );
+
+        // 5 Clean Horizontal Milestone Rows (y: cardY + 324 to cardY + 868)
+        const rStartY = cardY + 326;
+        const rH = 96;
+        const rGap = 14;
+        const rW = cardW - cPad * 2;
+
+        state.milestones.forEach((m, idx) => {
+          const ry = rStartY + idx * (rH + rGap);
+          const isDone = m.done;
+          const isNext = idx === activeIdx;
+
+          roundRectPath(ctx, cardX + cPad, ry, rW, rH, 16);
+          ctx.fillStyle = ed.cardBg;
+          ctx.fill();
+          ctx.lineWidth = isNext ? 3 : 1.6;
+          ctx.strokeStyle = isNext ? ed.terracotta : ed.cardBorder;
+          ctx.stroke();
+
+          // Left T-XX Badge Pill
+          const px = cardX + cPad + 18;
+          const py = ry + 26;
+          const pw = 118;
+          const ph = 44;
+          roundRectPath(ctx, px, py, pw, ph, 10);
+          ctx.fillStyle = isDone ? ed.forest : isNext ? ed.terracotta : ed.navy;
+          ctx.fill();
+          drawFittedText(ctx, formatTCode(m.date), px + pw / 2, py + ph / 2 + 1, pw - 16, '"JetBrains Mono", monospace', '700', 22, '#FFFFFF', 'center');
+
+          // Date • Title + Note
+          const tx = px + pw + 24;
+          const rightAreaW = 190;
+          const tMaxW = rW - (tx - (cardX + cPad)) - rightAreaW - 24;
+
+          drawFittedText(
+            ctx,
+            `${formatShortDate(m.date)}  •  ${m.title}`,
+            tx,
+            ry + 35,
+            tMaxW,
+            '"Space Grotesk", sans-serif',
+            '700',
+            26,
+            isDone ? ed.inkSecondary : ed.inkPrimary,
+            'left'
+          );
+          drawFittedText(
+            ctx,
+            m.note,
+            tx,
+            ry + 67,
+            tMaxW,
+            '"Space Grotesk", sans-serif',
+            '500',
+            19,
+            ed.inkMuted,
+            'left'
+          );
+
+          // Right Status Callout: Tilted -7deg CLEARED Stamp / NEXT GATE / GATE 03..05
+          const rxCenter = cardX + cPad + rW - rightAreaW / 2 - 12;
+          if (isDone) {
+            drawClearedRubberStamp(ctx, rxCenter, ry + rH / 2, 162, 58, ed.forest);
+          } else if (isNext) {
+            drawFittedText(ctx, 'NEXT GATE', rxCenter, ry + rH / 2 + 1, rightAreaW - 12, '"JetBrains Mono", monospace', '700', 21, ed.terracotta, 'center');
+          } else {
+            drawFittedText(ctx, `GATE 0${idx + 1}`, rxCenter, ry + rH / 2 + 1, rightAreaW - 12, '"JetBrains Mono", monospace', '700', 19, ed.inkMuted, 'center');
+          }
+        });
+
+        // Bottom 3 Dark Rounded Feature Pills with Colored Status Dots
+        const pills = [
+          { label: 'OS Clock Safe-Zone', dot: ed.terracotta },
+          { label: 'Phone + Desktop PNG', dot: ed.brass },
+          { label: 'Daily .ICS Reminders', dot: ed.forest },
+        ];
+        const pillY = cardY + 894;
+        const pillH = 52;
+        const pillGap = 16;
+        const pillW = (rW - pillGap * 2) / 3;
+
+        pills.forEach((p, i) => {
+          const px = cardX + cPad + i * (pillW + pillGap);
+          roundRectPath(ctx, px, pillY, pillW, pillH, 14);
+          ctx.fillStyle = ed.navy;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(px + 26, pillY + pillH / 2, 5.5, 0, Math.PI * 2);
+          ctx.fillStyle = p.dot;
+          ctx.fill();
+
+          drawFittedText(
+            ctx,
+            p.label,
+            px + 44,
+            pillY + pillH / 2 + 1,
+            pillW - 58,
+            '"JetBrains Mono", monospace',
+            '600',
+            18,
+            '#F3EDE0',
+            'left'
+          );
+        });
+
+        // Subtle Card Footer Line
+        drawFittedText(
+          ctx,
+          `EDITION: ${ed.name.toUpperCase()}  •  READY TO SET AS LOCK SCREEN TODAY`,
+          cardX + cPad,
+          cardY + 976,
+          rW,
+          '"JetBrains Mono", monospace',
+          '600',
+          17,
+          ed.inkMuted,
+          'left'
+        );
+
+        ctx.restore(); // End clipped right card
+
+        // Crisp subtle card rim stroke
+        ctx.save();
+        roundRectPath(ctx, cardX, cardY, cardW, cardH, cardR);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = ed.isDark ? 'rgba(212,175,106,0.35)' : 'rgba(185,151,91,0.45)';
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      /* -----------------------------------------------------------------------
+       * 8. RFC 5545 DAILY + 5-GATE CALENDAR (.ICS) GENERATOR
+       * ----------------------------------------------------------------------- */
+      function escapeIcs(str) {
+        return String(str || '')
+          .replace(/\\/g, '\\\\')
+          .replace(/;/g, '\\;')
+          .replace(/,/g, '\\,')
+          .replace(/\r?\n/g, '\\n');
+      }
+
+      function toIcsDate(dateStr, hhmm) {
+        const d = parseDateStr(dateStr);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}${m}${day}T${hhmm}00`;
+      }
+
+      function toIcsUtcNow() {
+        const n = new Date();
+        return (
+          n.getUTCFullYear() +
+          String(n.getUTCMonth() + 1).padStart(2, '0') +
+          String(n.getUTCDate()).padStart(2, '0') +
+          'T' +
+          String(n.getUTCHours()).padStart(2, '0') +
+          String(n.getUTCMinutes()).padStart(2, '0') +
+          String(n.getUTCSeconds()).padStart(2, '0') +
+          'Z'
+        );
+      }
+
+      function generateIcsContent() {
+        const stamp = toIcsUtcNow();
+        const origin = (state.origin || 'NOW').toUpperCase();
+        const dest = (state.dest || 'JOB').toUpperCase();
+        const route = `${origin} -> ${dest}`;
+        const today = getTodayMidnight();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        const target = parseDateStr(state.targetDate);
+        const untilStr = `${target.getFullYear()}${String(target.getMonth() + 1).padStart(2, '0')}${String(target.getDate()).padStart(2, '0')}T235959Z`;
+
+        const lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Final Boarding//Vintage Express Countdown Studio//EN',
+          'CALSCALE:GREGORIAN',
+          'METHOD:PUBLISH',
+          `X-WR-CALNAME:${escapeIcs(`Final Boarding: ${route}`)}`,
+          // 1. Daily Recurring Check-In Reminder through Target Deadline
+          'BEGIN:VEVENT',
+          `UID:fb-daily-checkin-${state.targetDate}@finalboarding.studio`,
+          `DTSTAMP:${stamp}`,
+          `DTSTART:${toIcsDate(todayStr, '0900')}`,
+          `DTEND:${toIcsDate(todayStr, '0915')}`,
+          `RRULE:FREQ=DAILY;UNTIL=${untilStr}`,
+          `SUMMARY:${escapeIcs(`Daily Boarding Check-In (${route})`)}`,
+          `DESCRIPTION:${escapeIcs(`15-minute daily momentum check for ${state.subtitle}. Stamp completed gates CLEARED in Final Boarding Studio.`)}`,
+          'STATUS:CONFIRMED',
+          'BEGIN:VALARM',
+          'ACTION:DISPLAY',
+          `DESCRIPTION:${escapeIcs(`Daily Boarding Check-In: ${route}`)}`,
+          'TRIGGER:-PT10M',
+          'END:VALARM',
+          'END:VEVENT',
+        ];
+
+        // 2. All 5 Milestone Gate Events
+        state.milestones.forEach((m, idx) => {
+          lines.push(
+            'BEGIN:VEVENT',
+            `UID:fb-gate-0${idx + 1}-${m.date}@finalboarding.studio`,
+            `DTSTAMP:${stamp}`,
+            `DTSTART:${toIcsDate(m.date, '1000')}`,
+            `DTEND:${toIcsDate(m.date, '1045')}`,
+            `SUMMARY:${escapeIcs(`[Gate 0${idx + 1}/05] ${m.title} (${route})`)}`,
+            `DESCRIPTION:${escapeIcs(`${m.note} — Target: ${formatShortDate(state.targetDate)} (${state.subtitle}).`)}`,
+            'STATUS:CONFIRMED',
+            'BEGIN:VALARM',
+            'ACTION:DISPLAY',
+            `DESCRIPTION:${escapeIcs(`Gate 0${idx + 1}: ${m.title}`)}`,
+            'TRIGGER:-PT15M',
+            'END:VALARM',
+            'BEGIN:VALARM',
+            'ACTION:DISPLAY',
+            `DESCRIPTION:${escapeIcs(`Tomorrow — Gate 0${idx + 1}: ${m.title}`)}`,
+            'TRIGGER:-P1D',
+            'END:VALARM',
+            'END:VEVENT'
+          );
+        });
+
+        // 3. Final Target Deadline Event
+        lines.push(
+          'BEGIN:VEVENT',
+          `UID:fb-target-deadline-${state.targetDate}@finalboarding.studio`,
+          `DTSTAMP:${stamp}`,
+          `DTSTART:${toIcsDate(state.targetDate, '1700')}`,
+          `DTEND:${toIcsDate(state.targetDate, '1800')}`,
+          `SUMMARY:${escapeIcs(`FINAL BOARDING DEADLINE: ${route} — ${state.subtitle}`)}`,
+          `DESCRIPTION:${escapeIcs(`You reached Gate T-00 for ${state.subtitle}!`)}`,
+          'STATUS:CONFIRMED',
+          'BEGIN:VALARM',
+          'ACTION:DISPLAY',
+          `DESCRIPTION:${escapeIcs(`FINAL BOARDING: ${route}`)}`,
+          'TRIGGER:-PT30M',
+          'END:VALARM',
+          'END:VEVENT',
+          'END:VCALENDAR'
+        );
+
+        return lines.join('\r\n') + '\r\n';
+      }
+
+      /* -----------------------------------------------------------------------
+       * 9. DOWNLOAD, CLIPBOARD & TOAST UTILITIES
+       * ----------------------------------------------------------------------- */
+      function showToast(msg, color = 'emerald') {
+        const banner = document.getElementById('toastBanner');
+        const dot = document.getElementById('toastIndicator');
+        const txt = document.getElementById('toastText');
+        txt.textContent = msg;
+        dot.className = `w-2 h-2 rounded-full ${
+          color === 'terra' ? 'bg-ticket-terracotta' : color === 'brass' ? 'bg-ticket-brass' : 'bg-emerald-400'
+        }`;
+        banner.classList.remove('hidden');
+        banner.classList.add('flex', 'toast-anim');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          banner.classList.add('hidden');
+          banner.classList.remove('flex', 'toast-anim');
+        }, 3000);
+      }
+
+      function triggerDownload(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+      }
+
+      async function exportPng(kind) {
+        try {
+          if (document.fonts && document.fonts.ready) {
+            await document.fonts.ready;
+          }
+          const off = document.createElement('canvas');
+          const routeSlug = `${(state.origin || 'now').toLowerCase()}-${(state.dest || 'job').toLowerCase()}`;
+          let filename = `final-boarding-${routeSlug}-${state.editionId}.png`;
+
+          if (kind === 'phone') {
+            renderPhoneCanvas(off); // Pure frameless wallpaper!
+            filename = `final-boarding-${routeSlug}-${state.editionId}-phone-1290x2796.png`;
+          } else if (kind === 'desktop') {
+            renderDesktopCanvas(off);
+            filename = `final-boarding-${routeSlug}-${state.editionId}-desktop-2560x1440.png`;
+          } else {
+            renderCoverCanvas(off);
+            filename = `final-boarding-${routeSlug}-${state.editionId}-cover-1800x1200.png`;
+          }
+
+          off.toBlob(
+            (blob) => {
+              if (!blob) {
+                showToast('Could not export PNG — please try again.', 'terra');
+                return;
+              }
+              triggerDownload(blob, filename);
+              showToast(`Downloaded ${filename}`, kind === 'cover' ? 'terra' : 'emerald');
+            },
+            'image/png',
+            1.0
+          );
+        } catch (err) {
+          console.error('Export PNG failed:', err);
+          showToast('Export error — see console.', 'terra');
+        }
+      }
+
+      function exportIcs() {
+        try {
+          const ics = generateIcsContent();
+          const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+          const slug = `${(state.origin || 'now').toLowerCase()}-${(state.dest || 'job').toLowerCase()}`;
+          const filename = `final-boarding-${slug}-daily-reminders.ics`;
+          triggerDownload(blob, filename);
+          showToast(`Exported daily + 5-gate calendar (${filename})`, 'emerald');
+        } catch (err) {
+          console.error('Export ICS failed:', err);
+          showToast('Could not generate .ics calendar file.', 'terra');
+        }
+      }
+
+      function copyTextReliable(text, label) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(`${label} copied to clipboard`, 'brass');
+        } catch (err) {
+          console.error('Copy failed:', err);
+          showToast('Press Ctrl/Cmd+C to copy manually', 'terra');
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+       * 10. UI SYNCHRONIZATION & LIVE STAGE RENDERING
+       * ----------------------------------------------------------------------- */
+      function renderVisibleStage() {
+        try {
+          if (state.mode === 'phone') {
+            renderPhoneCanvas(document.getElementById('canvasPhone'));
+          } else if (state.mode === 'desktop') {
+            renderDesktopCanvas(document.getElementById('canvasDesktop'));
+          } else {
+            renderCoverCanvas(document.getElementById('canvasCover'));
+          }
+          syncTelemetryUI();
+        } catch (err) {
+          console.error('Stage render error:', err);
+        }
+      }
+
+      function syncTelemetryUI() {
+        const ed = EDITIONS[state.editionId];
+        const cd = getCountdownSummary(state.targetDate);
+        const stats = getProgressStats();
+        const o = (state.origin || 'NOW').toUpperCase();
+        const d = (state.dest || 'JOB').toUpperCase();
+
+        document.getElementById('headerRouteText').textContent = `${o} → ${d}`;
+        document.getElementById('headerCountdownText').textContent = cd.full;
+        document.getElementById('activeEditionFooter').textContent = `EDITION: ${ed.name.toUpperCase()}`;
+        document.getElementById('stageProgressSummary').textContent = `${stats.done} OF ${stats.total} GATES CLEARED · ${stats.pct}%`;
+
+        // Sync live iPhone 16 Pro status bar ink (#1B2330 on light tickets, #F5F1E8 on dark Midnight Sleeper)
+        document.querySelectorAll('.js-ios-status-ink').forEach((el) => {
+          el.style.color = ed.statusBarInk;
+        });
+      }
+
+      function updateStageTabsAndOverlays() {
+        const stagePhone = document.getElementById('stagePhone');
+        const stageDesktop = document.getElementById('stageDesktop');
+        const stageCover = document.getElementById('stageCover');
+        const overlayWrap = document.getElementById('overlayTabsWrap');
+        const specCaption = document.getElementById('stageSpecCaption');
+        const modeBadge = document.getElementById('stageModeBadge');
+
+        stagePhone.classList.toggle('hidden', state.mode !== 'phone');
+        stagePhone.classList.toggle('flex', state.mode === 'phone');
+
+        stageDesktop.classList.toggle('hidden', state.mode !== 'desktop');
+        stageDesktop.classList.toggle('flex', state.mode === 'desktop');
+
+        stageCover.classList.toggle('hidden', state.mode !== 'cover');
+        stageCover.classList.toggle('flex', state.mode === 'cover');
+
+        if (state.mode === 'cover') {
+          overlayWrap.classList.add('opacity-40', 'pointer-events-none');
+          specCaption.textContent = '1800 × 1200 PX · 3:2 HANDSHAKE SHOWCASE COVER';
+          modeBadge.textContent = 'IPHONE 16 PRO + TICKET CARD';
+        } else {
+          overlayWrap.classList.remove('opacity-40', 'pointer-events-none');
+          specCaption.textContent =
+            state.mode === 'phone'
+              ? '1290 × 2796 PX · 19.5:9 IPHONE 16 PRO'
+              : '2560 × 1440 PX · 16:9 WORKSTATION';
+          modeBadge.textContent =
+            state.overlay === 'os'
+              ? 'LIVE iOS LOCK SCREEN'
+              : state.overlay === 'xray'
+              ? 'SAFE-ZONE X-RAY'
+              : 'PURE WALLPAPER';
+        }
+
+        const showOs = state.overlay === 'os';
+        const showXray = state.overlay === 'xray';
+
+        document.getElementById('phoneOsOverlay').classList.toggle('hidden', !showOs);
+        document.getElementById('phoneXrayOverlay').classList.toggle('hidden', !showXray);
+        document.getElementById('phoneXrayOverlay').classList.toggle('flex', showXray);
+
+        document.getElementById('desktopOsOverlay').classList.toggle('hidden', !showOs);
+        document.getElementById('desktopXrayOverlay').classList.toggle('hidden', !showXray);
+        document.getElementById('desktopXrayOverlay').classList.toggle('flex', showXray);
+
+        // Mode tab active highlight
+        document.querySelectorAll('.mode-tab').forEach((btn) => {
+          const active = btn.dataset.mode === state.mode;
+          btn.className = `mode-tab flex-1 sm:flex-none px-3 py-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition-all ${
+            active
+              ? 'bg-[#252A34] text-white border border-white/15 shadow'
+              : 'text-zinc-400 hover:text-zinc-200 border border-transparent'
+          }`;
+        });
+
+        // Overlay tab active highlight
+        document.querySelectorAll('.overlay-tab').forEach((btn) => {
+          const active = btn.dataset.overlay === state.overlay;
+          btn.className = `overlay-tab flex-1 sm:flex-none px-2.5 py-2 rounded-lg text-[11px] font-mono font-semibold whitespace-nowrap transition-all ${
+            active
+              ? 'bg-ticket-terracotta/25 text-[#F5B0A0] border border-ticket-terracotta/50'
+              : 'text-zinc-400 hover:text-zinc-200 border border-transparent'
+          }`;
+        });
+
+        renderVisibleStage();
+      }
+
+      function updateSelectorButtonStates() {
+        document.querySelectorAll('.edition-btn').forEach((btn) => {
+          const active = btn.dataset.edition === state.editionId;
+          btn.classList.toggle('bg-[#232833]', active);
+          btn.classList.toggle('border-ticket-terracotta', active);
+          btn.classList.toggle('ring-1', active);
+          btn.classList.toggle('ring-ticket-terracotta/40', active);
+          btn.classList.toggle('bg-[#14171D]', !active);
+          btn.classList.toggle('border-white/10', !active);
+        });
+
+        document.querySelectorAll('.preset-btn').forEach((btn) => {
+          const active = btn.dataset.preset === state.presetId;
+          btn.classList.toggle('bg-white/10', active);
+          btn.classList.toggle('border-ticket-brass/60', active);
+          btn.classList.toggle('text-[#F4EFE3]', active);
+          btn.classList.toggle('bg-[#14171D]', !active);
+          btn.classList.toggle('border-white/10', !active);
+          btn.classList.toggle('text-zinc-400', !active);
+        });
+
+        document.querySelectorAll('.transport-btn').forEach((btn) => {
+          const active = btn.dataset.transport === state.transport;
+          btn.classList.toggle('bg-ticket-terracotta/25', active);
+          btn.classList.toggle('border-ticket-terracotta/60', active);
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('bg-[#14171D]', !active);
+          btn.classList.toggle('border-white/10', !active);
+          btn.classList.toggle('text-zinc-400', !active);
+        });
+      }
+
+      function syncInputsFromState() {
+        document.getElementById('inputOrigin').value = state.origin;
+        document.getElementById('inputDest').value = state.dest;
+        document.getElementById('inputSubtitle').value = state.subtitle;
+        document.getElementById('inputTargetDate').value = state.targetDate;
+      }
+
+      function renderMilestoneEditor() {
+        const list = document.getElementById('milestoneListContainer');
+        list.innerHTML = '';
+        const activeIdx = getActiveGateIndex();
+
+        state.milestones.forEach((m, idx) => {
+          const isDone = m.done;
+          const isNext = idx === activeIdx;
+
+          const card = document.createElement('div');
+          card.className = `rounded-xl p-3 border transition-all flex flex-col gap-2 ${
+            isNext
+              ? 'bg-[#1D1B1C] border-ticket-terracotta/60'
+              : isDone
+              ? 'bg-[#121917] border-emerald-500/35'
+              : 'bg-[#13161C] border-white/10'
+          }`;
+
+          // Top row: Stamp toggle button + Gate badge + Date picker
+          const topRow = document.createElement('div');
+          topRow.className = 'flex items-center gap-2';
+
+          const stampBtn = document.createElement('button');
+          stampBtn.type = 'button';
+          stampBtn.className = `px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold tracking-wider uppercase border transition-all shrink-0 ${
+            isDone
+              ? 'bg-emerald-600/25 border-emerald-400/60 text-emerald-300'
+              : isNext
+              ? 'bg-ticket-terracotta/25 border-ticket-terracotta text-[#F5B0A0]'
+              : 'bg-white/5 border-white/15 text-zinc-400 hover:text-white'
+          }`;
+          stampBtn.textContent = isDone ? '✓ CLEARED' : isNext ? '● NEXT GATE' : `GATE 0${idx + 1}`;
+          stampBtn.title = isDone ? 'Click to unstamp gate' : 'Click to stamp CLEARED';
+          stampBtn.addEventListener('click', () => {
+            state.milestones[idx].done = !state.milestones[idx].done;
+            renderMilestoneEditor();
+            renderVisibleStage();
+          });
+
+          const dateIn = document.createElement('input');
+          dateIn.type = 'date';
+          dateIn.value = m.date;
+          dateIn.className = 'ml-auto px-2 py-1 rounded-lg bg-[#0C0E11] border border-white/10 text-[11px] font-mono text-zinc-200 focus:outline-none focus:border-ticket-terracotta';
+          dateIn.addEventListener('input', (e) => {
+            state.milestones[idx].date = e.target.value;
+            renderVisibleStage();
+          });
+
+          topRow.appendChild(stampBtn);
+          topRow.appendChild(dateIn);
+
+          // Title input
+          const titleIn = document.createElement('input');
+          titleIn.type = 'text';
+          titleIn.value = m.title;
+          titleIn.maxLength = 36;
+          titleIn.placeholder = `Gate 0${idx + 1} milestone title`;
+          titleIn.className = `w-full px-2.5 py-1.5 rounded-lg bg-[#0C0E11] border border-white/10 text-xs font-semibold focus:outline-none focus:border-ticket-terracotta ${
+            isDone ? 'text-zinc-400 line-through' : 'text-white'
+          }`;
+          titleIn.addEventListener('input', (e) => {
+            state.milestones[idx].title = e.target.value;
+            renderVisibleStage();
+          });
+
+          // Note input
+          const noteIn = document.createElement('input');
+          noteIn.type = 'text';
+          noteIn.value = m.note;
+          noteIn.maxLength = 54;
+          noteIn.placeholder = 'Short action detail';
+          noteIn.className = 'w-full px-2.5 py-1.5 rounded-lg bg-[#0C0E11] border border-white/10 text-[11px] text-zinc-300 focus:outline-none focus:border-ticket-terracotta';
+          noteIn.addEventListener('input', (e) => {
+            state.milestones[idx].note = e.target.value;
+            renderVisibleStage();
+          });
+
+          card.appendChild(topRow);
+          card.appendChild(titleIn);
+          card.appendChild(noteIn);
+          list.appendChild(card);
+        });
+      }
+
+      /* -----------------------------------------------------------------------
+       * 11. LIVE TICKING OS CLOCK & MODAL CHARACTER COUNTER
+       * ----------------------------------------------------------------------- */
+      function tickLiveClock() {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const timeStr = `${hh}:${mm}`;
+        const dateStr = `${WEEKDAYS[now.getDay()]}, ${MONTHS_TITLE[now.getMonth()]} ${now.getDate()}`;
+
+        document.querySelectorAll('.js-live-time').forEach((el) => {
+          el.textContent = timeStr;
+        });
+        document.querySelectorAll('.js-live-date').forEach((el) => {
+          el.textContent = dateStr;
+        });
+      }
+
+      function updateDescCounter() {
+        const ta = document.getElementById('kitDescTextarea');
+        const counter = document.getElementById('kitCharCounter');
+        const len = ta.value.length;
+        counter.textContent = `${len} / 500`;
+        counter.className = `text-[11px] font-mono ${len > 480 ? 'text-amber-400' : 'text-emerald-400'}`;
+      }
+
+      /* -----------------------------------------------------------------------
+       * 12. EVENT WIRING & BOOTSTRAP
+       * ----------------------------------------------------------------------- */
+      function loadPreset(presetKey) {
+        const p = PRESETS[presetKey];
+        if (!p) return;
+        state.presetId = p.id;
+        state.origin = p.origin;
+        state.dest = p.dest;
+        state.transport = p.transport;
+        state.subtitle = p.subtitle;
+        state.targetDate = p.targetDate;
+        state.milestones = p.milestones.map((m) => ({ ...m }));
+
+        syncInputsFromState();
+        updateSelectorButtonStates();
+        renderMilestoneEditor();
+        renderVisibleStage();
+        showToast(`Loaded route: ${p.origin} → ${p.dest}`, 'brass');
+      }
+
+      function bindEvents() {
+        // Device Mode Tabs
+        document.querySelectorAll('.mode-tab').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state.mode = btn.dataset.mode;
+            updateStageTabsAndOverlays();
+          });
+        });
+
+        // Overlay Tabs
+        document.querySelectorAll('.overlay-tab').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state.overlay = btn.dataset.overlay;
+            updateStageTabsAndOverlays();
+          });
+        });
+
+        // Collector Editions
+        document.querySelectorAll('.edition-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state.editionId = btn.dataset.edition;
+            updateSelectorButtonStates();
+            renderVisibleStage();
+          });
+        });
+
+        // Presets
+        document.querySelectorAll('.preset-btn').forEach((btn) => {
+          btn.addEventListener('click', () => loadPreset(btn.dataset.preset));
+        });
+
+        // Transport Emblems
+        document.querySelectorAll('.transport-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state.transport = btn.dataset.transport;
+            updateSelectorButtonStates();
+            renderVisibleStage();
+          });
+        });
+
+        // Route Inputs
+        document.getElementById('inputOrigin').addEventListener('input', (e) => {
+          state.origin = e.target.value.toUpperCase();
+          renderVisibleStage();
+        });
+        document.getElementById('inputDest').addEventListener('input', (e) => {
+          state.dest = e.target.value.toUpperCase();
+          renderVisibleStage();
+        });
+        document.getElementById('inputSubtitle').addEventListener('input', (e) => {
+          state.subtitle = e.target.value;
+          renderVisibleStage();
+        });
+        document.getElementById('inputTargetDate').addEventListener('input', (e) => {
+          state.targetDate = e.target.value;
+          renderVisibleStage();
+        });
+
+        // Sort Milestones Chronologically
+        document.getElementById('btnSortGates').addEventListener('click', () => {
+          state.milestones.sort((a, b) => parseDateStr(a.date) - parseDateStr(b.date));
+          renderMilestoneEditor();
+          renderVisibleStage();
+          showToast('Boarding gates sorted chronologically', 'brass');
+        });
+
+        // Simulated Handshake 1.4K Badge Toggle
+        document.getElementById('btnToggleBadgeSim').addEventListener('click', () => {
+          state.showBadgeSim = !state.showBadgeSim;
+          const badge = document.getElementById('handshakeBadgeSim');
+          const dot = document.getElementById('badgeSimDot');
+          badge.classList.toggle('hidden', !state.showBadgeSim);
+          badge.classList.toggle('flex', state.showBadgeSim);
+          dot.className = `w-2 h-2 rounded-full ${state.showBadgeSim ? 'bg-emerald-400' : 'bg-zinc-500'}`;
+        });
+
+        // Exports
+        document.getElementById('btnDownloadPhone').addEventListener('click', () => exportPng('phone'));
+        document.getElementById('btnDownloadDesktop').addEventListener('click', () => exportPng('desktop'));
+        document.getElementById('btnDownloadCover').addEventListener('click', () => exportPng('cover'));
+        document.getElementById('btnQuickCoverTop').addEventListener('click', () => exportPng('cover'));
+        document.getElementById('btnDownloadIcs').addEventListener('click', exportIcs);
+
+        // Submission Kit Modal
+        const modal = document.getElementById('submissionModal');
+        const openModal = () => {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          updateDescCounter();
+        };
+        const closeModal = () => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        };
+        document.getElementById('btnOpenSubmissionKitTop').addEventListener('click', openModal);
+        document.getElementById('btnCloseModal').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+
+        document.getElementById('kitDescTextarea').addEventListener('input', updateDescCounter);
+        document.getElementById('btnCopyTitle').addEventListener('click', () => {
+          copyTextReliable(document.getElementById('kitTitleInput').value, 'Project Title');
+        });
+        document.getElementById('btnCopyDesc').addEventListener('click', () => {
+          copyTextReliable(document.getElementById('kitDescTextarea').value, 'Description');
+        });
+      }
+
+      async function boot() {
+        syncInputsFromState();
+        updateSelectorButtonStates();
+        renderMilestoneEditor();
+        updateDescCounter();
+        bindEvents();
+        tickLiveClock();
+        setInterval(tickLiveClock, 1000);
+
+        if (document.fonts && document.fonts.ready) {
+          try {
+            await document.fonts.ready;
+          } catch (_) {
+            // Proceed gracefully if font API rejects
+          }
+        }
+        updateStageTabsAndOverlays();
+      }
+
+      window.addEventListener('DOMContentLoaded', boot);
+    })();
+  </script>
+</body>
+</html>
